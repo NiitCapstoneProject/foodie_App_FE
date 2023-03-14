@@ -1,0 +1,13 @@
+.form-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+mat-card {
+  width: 400px;
+}
+span{
+  color: red;
+}
