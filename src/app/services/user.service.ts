@@ -8,8 +8,9 @@ import { LoginService } from './login.service';
 })
 export class UserService {
   constructor(private http: HttpClient,private login:LoginService) { }
-  register(user:User){
-    this.http.post("http://localhost:9000/api/v1/add",user).subscribe({
+  register(user:FormData){
+    console.log(user)
+    this.http.post("http://localhost:9000/api/v1/register",user).subscribe({
       next:(data:any)=>{
         if(data!="")
         {
