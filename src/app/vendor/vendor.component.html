@@ -1,0 +1,15 @@
+<Form [formGroup]="vendorForm" class="form-container" (ngSubmit)="onSubmit()">
+  <mat-checkbox [formControl]="vendor" required>I have read and agreed to T&C which I have no access to read</mat-checkbox>
+
+
+<mat-form-field appearance="fill">
+  <mat-label>Enter Password to confirm</mat-label>
+  <input matInput placeholder="Password" [formControl]="password" required type="password">
+  <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+</mat-form-field>
+
+  <div>
+     <button mat-raised-button color="primary" type="submit" [disabled]="!vendorForm.valid">Register as vendor </button>
+  </div>
+</Form>
+

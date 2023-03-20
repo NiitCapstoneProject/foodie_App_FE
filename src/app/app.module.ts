@@ -20,6 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
+import { VendorComponent } from './vendor/vendor.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import {MatMenuModule} from '@angular/material/menu';
     HeaderComponent,
     DashboardComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    VendorComponent,
+    AddRestaurantComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,MatFormFieldModule,MatDatepickerModule,MatNativeDateModule,MatInputModule, HttpClientModule,
-    ReactiveFormsModule,MatSidenavModule,MatListModule,MatMenuModule
+    ReactiveFormsModule,MatSidenavModule,MatListModule,MatMenuModule,MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <mat-form-field>
+    <input matInput formControlName="name" placeholder="Name">
+    <mat-error *ngIf="form.controls['name'].invalid">Name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput formControlName="description" placeholder="Description"></textarea>
+    <mat-error *ngIf="form.controls['description'].invalid">Description is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="city" placeholder="City">
+    <mat-error *ngIf="form.controls['city'].invalid">City is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input type="file" (change)="onFileSelected($event)" formControlName="image">
+    <mat-error *ngIf="form.controls['image'].invalid">Image is required</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit"[disabled]="form.invalid" >Submit</button>
+</form>

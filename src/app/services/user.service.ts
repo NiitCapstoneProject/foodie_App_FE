@@ -1,6 +1,7 @@
+import { User } from './../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models/user';
+// import { User } from '../models/user';
 import { LoginService } from './login.service';
 
 @Injectable({
@@ -11,6 +12,17 @@ export class UserService {
   register(user:FormData){
     console.log(user)
     this.http.post("http://localhost:9000/api/v1/register",user).subscribe({
+      next:(data:any)=>{
+        if(data!="")
+        {
+          console.log(data)
+        }
+      }
+  })
+  }
+  vendor(user:User){
+    console.log("is working")
+    this.http.post("http://localhost:9000/api/v1/vendor",user).subscribe({
       next:(data:any)=>{
         if(data!="")
         {

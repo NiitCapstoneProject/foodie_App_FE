@@ -61,10 +61,7 @@ export class RegistrationComponent {
 
         // ,this.image1.name
         );
-    //     return formdata
-  //   const formData = new FormData();
-  // formData.append('user', JSON.stringify(user));
-  // formData.append('image', this.image1);
+
   return formdata;
   }
   passwordMatchValidator: ValidatorFn = (control: AbstractControl): {[key: string]: any} | null => {
