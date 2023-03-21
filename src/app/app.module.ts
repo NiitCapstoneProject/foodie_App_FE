@@ -23,7 +23,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import { VendorComponent } from './vendor/vendor.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
-
+import { RestaurantDashboardComponent } from './restaurant-dashboard/restaurant-dashboard.component';
+import { RestaurantCardsComponent } from './restaurant-cards/restaurant-cards.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AddCuisineComponent } from './add-cuisine/add-cuisine.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,11 @@ import { AddRestaurantComponent } from './add-restaurant/add-restaurant.componen
     LoginComponent,
     RegistrationComponent,
     VendorComponent,
-    AddRestaurantComponent
+    AddRestaurantComponent,
+    RestaurantDashboardComponent,
+    RestaurantCardsComponent,
+    NotFoundComponent,
+    AddCuisineComponent
   ],
   imports: [
     BrowserModule,

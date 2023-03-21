@@ -1,3 +1,5 @@
+import { Restaurant } from './../models/restaurant';
+import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -7,9 +9,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-restaurant.component.css']
 })
 export class AddRestaurantComponent {
+
+  image1:any;
   // form: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,private userService:UserService) {}
 
   form:FormGroup|any = this.fb.group({
     name: ['', Validators.required],
@@ -18,14 +22,35 @@ export class AddRestaurantComponent {
     image: ['', Validators.required],
   });
 
-  onFileSelected(event:any){}
+  onFileSelected(event:any){
+    this.image1 = event.target.files[0];
+  }
+
+
+  convert(restaurant:Restaurant):FormData{
+    const formdata = new FormData();
+    formdata.append('restaurant',
+    new Blob([JSON.stringify(restaurant)],{type:'application/json'})
+    );
+    formdata.append('image', this.image1
+
+        // ,this.image1.name
+        );
+
+  return formdata;
+  }
 
   submitForm() {
     if (this.form.invalid) {
       // this.snackBar.open('Please fill in all required fields', 'Dismiss', { duration: 3000 });
       return;
     }
-
+    let restaurant:Restaurant = {};
+    restaurant.city = this.form.value.city
+    restaurant.name = this.form.value.name
+    restaurant.description = this.form.value.description
+    restaurant.id = 209
+    this.userService.addRestaurant(this.convert(restaurant));
     // Submit form data here
   }
 }

@@ -1,0 +1,39 @@
+
+<form [formGroup]="cuisineForm" (ngSubmit)="onSubmit()">
+  <label>Fill the cuisine details</label>
+  <mat-form-field>
+    <input matInput formControlName="name" placeholder="Name">
+    <mat-error *ngIf="cuisineForm.controls['name'].invalid">Name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput formControlName="rating" placeholder="rating"></textarea>
+    <mat-error *ngIf="cuisineForm.controls['rating'].invalid">Description is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput formControlName="price" placeholder="price">
+    <mat-error *ngIf="cuisineForm.controls['price'].invalid">Price is required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput formControlName="type" placeholder="type">
+    <mat-error *ngIf="cuisineForm.controls['type'].invalid">Type is required</mat-error>
+  </mat-form-field>
+  <!-- <mat-form-field>
+    <input matInput formControlName="tag" placeholder="tag">
+    <mat-error *ngIf="cuisineForm.controls['tag'].invalid">Tag is required</mat-error>
+  </mat-form-field> -->
+
+
+    <input type="file" (change)="onFileSelected($event)" formControlName="image">
+    <!-- <mat-error *ngIf="form.controls['image'].invalid">Image is required</mat-error> -->
+
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>
+
+
+
+
+
+

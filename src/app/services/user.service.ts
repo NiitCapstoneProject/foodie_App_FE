@@ -1,5 +1,5 @@
 import { User } from './../models/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { User } from '../models/user';
 import { LoginService } from './login.service';
@@ -8,6 +8,7 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 export class UserService {
+
   constructor(private http: HttpClient,private login:LoginService) { }
   register(user:FormData){
     console.log(user)
@@ -30,5 +31,24 @@ export class UserService {
         }
       }
   })
+  }
+  addRestaurant(restaurant:FormData){
+    const headers = new HttpHeaders (
+      {
+        "authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJDdXN0b21lciBVc2VySWQiOiJleGFtcGxlMUBleGFtcGxlLmNvbSIsImlhdCI6MTY3OTMwMzI5NX0.uYAoNJXtDrr0bMpt6iduMm6tOj8GtA1O9Fhk6wEnkFK5mN41UrYFkUaSdeZXZ-xAuIwcEE_DRNbpWnweCTCnXA"
+        // +this.login.token
+      }
+    );
+    this.http.post("http://localhost:9000/api/v1/user/restaurant/"+"example1@example.com",restaurant
+    // this.login.user.email
+    ,{headers:headers}
+    ).subscribe(
+      res=>{console.log("added")}
+    )
+  }
+  addCuisine(cuisine:FormData){
+    this.http.post("http://localhost:9000/restaurant/cuisine/example1@example.com/200",cuisine).subscribe(
+      res=>{console.log("cuisine method")}
+    )
   }
 }

@@ -1,10 +1,10 @@
 import { Cuisine } from "./cuisine"
 
 export type Restaurant={
+  id?:number,
   name?:string,
-  cuisins:Cuisine[],
   city?:string,
   rating?:number,
-  image?:string,
-  feedback?:string
+  image?:number,
+  description?:string
 }
