@@ -1,3 +1,6 @@
+import { CuisineCardsComponent } from './cuisine-cards/cuisine-cards.component';
+import { CuisineDashboardComponent } from './cuisine-dashboard/cuisine-dashboard.component';
+import { AddCuisineComponent } from './add-cuisine/add-cuisine.component';
 import { RestaurantDashboardComponent } from './restaurant-dashboard/restaurant-dashboard.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { VendorComponent } from './vendor/vendor.component';
@@ -45,12 +48,27 @@ const routes: Routes = [
   path: "dashboard",
   component: RestaurantDashboardComponent,
 
-}
-// {
-//   path: '',
-//   redirectTo: '/song',
-//   pathMatch: 'full'
-// }
+},
+{
+  path: "cuisine",
+  component: AddCuisineComponent,
+
+},
+{
+  path: '',
+  redirectTo: '/dashboard',
+  pathMatch: 'full'
+},
+{
+  path: "cuisineDashboard",
+  component: CuisineDashboardComponent,
+
+},
+{
+  path: "cuisineCard",
+  component: CuisineCardsComponent,
+
+},
 ];
 
 @NgModule({

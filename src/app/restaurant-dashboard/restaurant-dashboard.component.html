@@ -1,3 +1,10 @@
-<div  *ngFor="let restaurant of restaurants">
+<!-- <div  *ngFor="let restaurant of restaurants">
   <app-restaurant-cards [restaurant]="restaurant" style="display: grid; grid-template-columns: 25%,25%,25% ;"> </app-restaurant-cards>
-</div>
+</div> -->
+
+
+<div class="restaurant-grid">
+  <div  *ngFor="let restaurant of restaurants">
+    <app-restaurant-cards [restaurant]="restaurant" > </app-restaurant-cards>
+  </div>
+  </div>

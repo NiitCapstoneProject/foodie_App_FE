@@ -1,5 +1,6 @@
 
 <form [formGroup]="form" (ngSubmit)="submitForm()">
+  <label>Fill the Restaurant details</label>
   <mat-form-field>
     <input matInput formControlName="name" placeholder="Name">
     <mat-error *ngIf="form.controls['name'].invalid">Name is required</mat-error>

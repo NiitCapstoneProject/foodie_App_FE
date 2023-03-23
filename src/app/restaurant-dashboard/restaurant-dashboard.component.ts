@@ -1,3 +1,4 @@
+import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
 import { Restaurant } from '../models/restaurant';
 
@@ -7,28 +8,16 @@ import { Restaurant } from '../models/restaurant';
   styleUrls: ['./restaurant-dashboard.component.css']
 })
 export class RestaurantDashboardComponent {
-  restaurants: Restaurant[] = [
-    {
-      id: 1,
-      name: 'Restaurant A',
-      city: 'New York',
-      rating: 4.5,
-      image: 1,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-    },
-    {
-      id: 2,
-      name: 'Restaurant B',
-      city: 'San Francisco',
-      rating: 4.2,
-      image: 21,
-      description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-    },
-  ];
+  constructor(private user:UserService){}
+  restaurants: Restaurant[] = []
 
 ngOnInit() {
-  // this.restaurants = this.restaurants;
+   this.user.getRestaurant().subscribe({next:(data:any)=>{
+    if(data!="")
+    {
+      this.restaurants = data
+    }
+  }})
+
 }
-
-
 }

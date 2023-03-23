@@ -1,4 +1,4 @@
-<p>
+<!-- <p>
   <mat-toolbar color="primary">
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>
@@ -12,4 +12,132 @@
       <mat-icon>share</mat-icon>
     </button>
   </mat-toolbar>
-</p>
+</p> -->
+
+
+
+<div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="../../assets/images/mini-removebg-preview.png" height="60px" width="60px" alt="MDB Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"> <i class="fas fa-bars"></i></span>
+      </button>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Vendor</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Cuisine</a>
+          </li> -->
+        </ul>
+        <!-- <div class="d-flex">
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              City
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="#">Bangalore</a></li>
+              <li><a class="dropdown-item" href="#">Mumbai</a></li>
+              <li><a class="dropdown-item" href="#">Delhi</a></li>
+            </ul>
+          </div>
+          <div class="d-flex ms-3">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+          </div>
+        </div> -->
+
+
+        <form class="d-flex justify-content-between align-items-center mb-4">
+
+
+          <div class="search-container d-flex align-items-center">
+             <div class="city-select me-2">
+              <select style="border-radius: 50px 0px 0px 50px;     width: 8rem;"  class="form-select " onchange="onMenuChange(event)">
+                <option value="Bangalore">Bangalore</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+              </select>
+             </div>
+          <!-- <label style="font-size: xx-small;" >City</label> -->
+
+            <input style="    border: groove;" id="hove" class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+            <div class="city-select ">
+              <select style="border-radius: 0px 50px 50px 0px;     width: 8rem;"  class="form-select" onchange="onMenuChange(event)" aria-placeholder="city">
+                <option value="Bangalore">Cuisine</option>
+                <option value="Mumbai">byResturant</option>
+              </select>
+            </div>
+            <button  class="btn btn-light" type="submit" style="border-radius: 50%; height: 40px; width: 40px; margin-left: 10px;"><i class="fas fa-search"></i></button>
+          </div>
+        </form>
+
+
+
+       <mat-icon class="navbar-nav ms-auto mb-2 mb-lg-0" *ngIf="!loggedIn" (click) = "goToLogin()">login</mat-icon>
+        <ul  *ngIf="loggedIn" class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i><span class="badge rounded-pill bg-light text-dark ms-1">1</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="http://localhost:9000/image/getimage/{{user.image}}" class="rounded-circle me-2" height="30" alt="Black and White Portrait of a Man">
+              {{user.name}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">My Profile</a></li>
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+
+
+
+
+
+
+
+
+        <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="30" alt="MDB Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"> <i class="fas fa-bars"></i></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              </ul>
+
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i><span class="badge rounded-pill bg-light text-dark ms-1">1</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle me-2" height="30" alt="Black and White Portrait of a Man">
+                    Username
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav> -->

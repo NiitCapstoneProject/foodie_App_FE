@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { User } from './../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -47,8 +48,12 @@ export class UserService {
     )
   }
   addCuisine(cuisine:FormData){
-    this.http.post("http://localhost:9000/restaurant/cuisine/example1@example.com/200",cuisine).subscribe(
+    this.http.post("http://localhost:9000/restaurant/cuisine/example1@example.com/0",cuisine).subscribe(
       res=>{console.log("cuisine method")}
     )
+  }
+
+  getRestaurant():Observable<any>{
+    return this.http.get("http://localhost:9000/restaurant/getAll")
   }
 }
