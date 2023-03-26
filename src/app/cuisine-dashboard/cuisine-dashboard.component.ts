@@ -1,6 +1,6 @@
 import { RestaurantService } from './../services/restaurant.service';
 import { Restaurant } from './../models/restaurant';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
 import { Cuisine } from '../models/cuisine';
 
@@ -11,13 +11,17 @@ import { Cuisine } from '../models/cuisine';
 })
 export class CuisineDashboardComponent {
   cuisines: Cuisine[] = []
-  constructor(private route:Router,private restuarant :RestaurantService){}
-  ngOnInit(){
-    this.restuarant.getCuisine().subscribe({next:(data:any)=>{
-      if(data!="")
-      {
-        this.cuisines = data
+  constructor(private route:Router,private restuarant :RestaurantService,private activate:ActivatedRoute){}
+  ngOnInit(): void {
+    this.activate.paramMap.subscribe(
+      data => {
+        let id = data.get('id') ?? 0;
+        this.restuarant.getCuisine(+id).subscribe(
+          res => {
+            this.cuisines = res
+          }
+        );
       }
-    }})
+    )
   }
 }

@@ -1,6 +1,68 @@
 <!-- <div  *ngFor="let restaurant of restaurants">
   <app-restaurant-cards [restaurant]="restaurant" style="display: grid; grid-template-columns: 25%,25%,25% ;"> </app-restaurant-cards>
 </div> -->
+<div style="justify-content: center;display: flex;padding: 20px;">
+
+  <form class="d-flex justify-content-between align-items-center mb-4">
+
+
+    <!-- <div class="rating">
+      <span class="star" [class.active]="rating >= 1" [class.gold]="gold && rating >= 3" (click)="setRating(1)">★</span>
+      <span class="star" [class.active]="rating >= 2" [class.gold]="gold && rating >= 3" (click)="setRating(2)">★</span>
+      <span class="star" [class.active]="rating >= 3" [class.gold]="gold" (click)="setRating(3)">★</span>
+      <span class="star" [class.active]="rating >= 4" [class.gold]="gold" (click)="setRating(4)">★</span>
+      <span class="star" [class.active]="rating >= 5" [class.gold]="gold" (click)="setRating(5)">★</span>
+    </div> -->
+
+
+    <div class="rating">
+      <span class="star" *ngIf="highlightedRating==0 || highlightedRating < 1 " [class.active]="rating >= 1" (click)="setRating(1)">★</span>
+      <span style = "color: gold;" class="star"  *ngIf="highlightedRating==01 || highlightedRating >0" [class.active]="rating >= 1" (click)="setRating(1)" >★</span>
+      <span class="star" *ngIf="highlightedRating==0 || highlightedRating<2 " [class.active]="rating >= 2" (click)="setRating(2)">★</span>
+      <span class="star" style = "color: gold;" *ngIf="highlightedRating==02 || (highlightedRating >0 &&  highlightedRating <3)"[class.active]="rating >= 2" (click)="setRating(2)">★</span>
+      <span class="star" *ngIf="highlightedRating==0 || highlightedRating<3 " [class.active]="rating >= 3" (click)="setRating(3)">★</span>
+      <span class="star" style = "color: gold;" *ngIf="highlightedRating==03 || (highlightedRating >0 &&  highlightedRating <4)" [class.active]="rating >= 3" (click)="setRating(3)">★</span>
+      <span class="star" *ngIf="highlightedRating==0 || highlightedRating<4 " [class.active]="rating >= 4" (click)="setRating(4)">★</span>
+      <span class="star" style = "color: gold;" *ngIf="highlightedRating==04 || (highlightedRating >0 &&  highlightedRating <5)" [class.active]="rating >= 4" (click)="setRating(4)">★</span>
+      <span class="star" *ngIf="highlightedRating==0 || highlightedRating<5 " [class.active]="rating >= 5" (click)="setRating(5)">★</span>
+      <span class="star" style = "color: gold;" *ngIf="highlightedRating==05 || (highlightedRating >0 &&  highlightedRating <3) " [class.active]="rating >= 5" (click)="setRating(5)">★</span>
+    </div>
+
+
+
+
+    <!-- import { NgxStarRatingModule } from 'ngx-star-rating'; -->
+
+    <!-- <div class="rating">
+  <span *ngFor="let star of stars"
+        class="star"
+        [class.active]="star <= rating"
+        [class.highlighted]="star <= highlightedRating"
+        (click)="setRating(star)"
+        (mouseenter)="highlightRating(star)"
+        (mouseleave)="removeHighlight()">
+    ★
+  </span>
+</div> -->
+
+    <div class="search-container d-flex align-items-center">
+       <div class="city-select me-2">
+        <select style="border-radius: 50px 0px 0px 50px; border: groove;    width: 8rem;"  class="form-select " onchange="onMenuChange(event)">
+          <option value="Bangalore">Bangalore</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Delhi">Delhi</option>
+        </select>
+       </div>
+
+
+      <input style="    border: groove; color: black;" id="hove" class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+
+      <button style="border-radius: 0px 50px 50px 0px; border: groove;" class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+    </div>
+  </form>
+</div>
+
+
 
 
 <div class="restaurant-grid">

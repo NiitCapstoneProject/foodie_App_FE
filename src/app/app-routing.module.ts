@@ -55,12 +55,7 @@ const routes: Routes = [
 
 },
 {
-  path: '',
-  redirectTo: '/dashboard',
-  pathMatch: 'full'
-},
-{
-  path: "cuisineDashboard",
+  path: "cuisineDashboard/:id",
   component: CuisineDashboardComponent,
 
 },
@@ -69,10 +64,15 @@ const routes: Routes = [
   component: CuisineCardsComponent,
 
 },
+{
+  path: '',
+  redirectTo: '/dashboard',
+  pathMatch: 'full'
+},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

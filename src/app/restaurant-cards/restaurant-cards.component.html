@@ -52,14 +52,16 @@
 
 
 
-<ul class="restaurant-list" (click)="onClick()">
+<ul class="restaurant-list" >
   <li>
     <div class="restaurant-item">
-      <a class="anchor" >
-        <img src="http://localhost:9000/image/getimage/{{restaurant.image}}" alt="food Images">
+      <a class="anchor">
+        <img src="http://localhost:9000/image/getimage/{{restaurant.image}}" alt="food Images"  (click)="onClick()">
         <div class="content">
           <div class="name">
+            <p (click)="onClick()" >
             {{restaurant.name}}
+            </p>
             <span class="favorite">♥️</span>
           </div>
           <div class="rating">

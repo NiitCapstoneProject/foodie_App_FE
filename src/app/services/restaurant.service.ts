@@ -9,7 +9,12 @@ import { Injectable } from '@angular/core';
 export class RestaurantService {
   constructor(private http:HttpClient) { }
   restaurant:any
-  getCuisine():Observable<any>{
-   return this.http.get("http://localhost:9000/restaurant/cuisine/"+this.restaurant)
+  getCuisine(id:any):Observable<any>{
+   return this.http.get("http://localhost:9000/restaurant/cuisine/"+id)
+  }
+
+
+  searchResAndCusName(name:any){
+    this.http.get("http://localhost:9000/restaurant/find/"+name)
   }
 }

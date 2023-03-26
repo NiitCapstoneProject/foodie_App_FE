@@ -1,3 +1,4 @@
+import { RestaurantService } from './../services/restaurant.service';
 import { Router, RouterModule } from '@angular/router';
 import { Login } from './../models/login';
 import { LoginService } from './../services/login.service';
@@ -16,6 +17,8 @@ export class HeaderComponent {
 
   goToLogin(){
     console.log("clicked")
-    this.route.navigateByUrl("/login")
+    this.route.navigateByUrl("/vendor")
+  }
+  search(name:any){
   }
 }
