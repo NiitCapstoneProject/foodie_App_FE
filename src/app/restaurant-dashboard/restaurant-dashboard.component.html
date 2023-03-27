@@ -2,7 +2,12 @@
   <app-restaurant-cards [restaurant]="restaurant" style="display: grid; grid-template-columns: 25%,25%,25% ;"> </app-restaurant-cards>
 </div> -->
 <div style="justify-content: center;display: flex;padding: 20px;">
-
+  <div class="count">
+  <div class="stars">
+    <ngx-star-rating [(ngModel)]="rating3" [id]="'rating3'" (click)="change()"></ngx-star-rating >
+  </div>
+  <div>Rating: {{ rating3 }}</div>
+</div>
   <form class="d-flex justify-content-between align-items-center mb-4">
 
 
@@ -15,7 +20,7 @@
     </div> -->
 
 
-    <div class="rating">
+    <!-- <div class="rating">
       <span class="star" *ngIf="highlightedRating==0 || highlightedRating < 1 " [class.active]="rating >= 1" (click)="setRating(1)">★</span>
       <span style = "color: gold;" class="star"  *ngIf="highlightedRating==01 || highlightedRating >0" [class.active]="rating >= 1" (click)="setRating(1)" >★</span>
       <span class="star" *ngIf="highlightedRating==0 || highlightedRating<2 " [class.active]="rating >= 2" (click)="setRating(2)">★</span>
@@ -26,7 +31,10 @@
       <span class="star" style = "color: gold;" *ngIf="highlightedRating==04 || (highlightedRating >0 &&  highlightedRating <5)" [class.active]="rating >= 4" (click)="setRating(4)">★</span>
       <span class="star" *ngIf="highlightedRating==0 || highlightedRating<5 " [class.active]="rating >= 5" (click)="setRating(5)">★</span>
       <span class="star" style = "color: gold;" *ngIf="highlightedRating==05 || (highlightedRating >0 &&  highlightedRating <3) " [class.active]="rating >= 5" (click)="setRating(5)">★</span>
-    </div>
+    </div> -->
+
+
+
 
 
 

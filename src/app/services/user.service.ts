@@ -4,11 +4,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { User } from '../models/user';
 import { LoginService } from './login.service';
+import { Order } from '../models/order';
+import { Cuisine } from '../models/cuisine';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  totalAmount:any
 
   constructor(private http: HttpClient,private login:LoginService) { }
   register(user:FormData){
@@ -55,5 +58,15 @@ export class UserService {
 
   getRestaurant():Observable<any>{
     return this.http.get("http://localhost:9000/restaurant/getAll")
+  }
+
+  placeOrder(order:Order):Observable<any>{
+    return this.http.post("http://localhost:9000/api/v1/example1@example.com/order",order)
+  }
+  getOrders():Observable<any>{
+    return this.http.get("http://localhost:9000/api/v1/allOrders/example1@example.com")
+  }
+  deleteCuisine(cuisine:Cuisine):Observable<any>{
+    return this.http.post("http://localhost:9000/api/v1/delete/example1@example.com",cuisine)
   }
 }

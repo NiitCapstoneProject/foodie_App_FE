@@ -30,6 +30,10 @@ import { AddCuisineComponent } from './add-cuisine/add-cuisine.component';
 import { CuisineCardsComponent } from './cuisine-cards/cuisine-cards.component';
 import { CuisineDashboardComponent } from './cuisine-dashboard/cuisine-dashboard.component';
 import { CartComponent } from './cart/cart.component';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { FormsModule} from '@angular/forms';
+import { OrderComponent } from './order/order.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +50,8 @@ import { CartComponent } from './cart/cart.component';
     AddCuisineComponent,
     CuisineCardsComponent,
     CuisineDashboardComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,7 @@ import { CartComponent } from './cart/cart.component';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,MatFormFieldModule,MatDatepickerModule,MatNativeDateModule,MatInputModule, HttpClientModule,
-    ReactiveFormsModule,MatSidenavModule,MatListModule,MatMenuModule,MatCheckboxModule
+    ReactiveFormsModule,MatSidenavModule,MatListModule,MatMenuModule,MatCheckboxModule, NgxStarRatingModule,FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

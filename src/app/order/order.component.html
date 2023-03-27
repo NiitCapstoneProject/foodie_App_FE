@@ -1,0 +1,12 @@
+<h2>Order History</h2>
+<br>
+<div *ngFor="let order of orders">
+    <div>
+    <h5>Items Ordered</h5>
+    <div *ngFor="let cuisine of order.cuisines">
+        <h6> {{cuisine.name}}</h6>
+    </div>
+    <h4>Total Bill Amount : {{order.totalBillAmount}}</h4>
+</div>
+<br>
+</div>

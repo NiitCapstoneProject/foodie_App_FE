@@ -1,3 +1,4 @@
+import { OrderComponent } from './order/order.component';
 import { CartComponent } from './cart/cart.component';
 import { CuisineCardsComponent } from './cuisine-cards/cuisine-cards.component';
 import { CuisineDashboardComponent } from './cuisine-dashboard/cuisine-dashboard.component';
@@ -11,6 +12,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
+
 
 const routes: Routes = [
  {
@@ -65,17 +67,27 @@ const routes: Routes = [
   component: CuisineCardsComponent,
 
 },
-{
-  path: '',
-  redirectTo: '/dashboard',
-  pathMatch: 'full'
-},
+
 
 {
   path: "cart",
   component: CartComponent,
 
 }
+,
+
+
+
+{
+  path: "order",
+  component: OrderComponent,
+
+},
+{
+  path: '',
+  redirectTo: '/dashboard',
+  pathMatch: 'full'
+},
 ];
 
 @NgModule({
