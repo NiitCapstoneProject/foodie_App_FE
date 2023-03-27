@@ -1,3 +1,4 @@
+import { CartComponent } from './cart/cart.component';
 import { CuisineCardsComponent } from './cuisine-cards/cuisine-cards.component';
 import { CuisineDashboardComponent } from './cuisine-dashboard/cuisine-dashboard.component';
 import { AddCuisineComponent } from './add-cuisine/add-cuisine.component';
@@ -69,6 +70,12 @@ const routes: Routes = [
   redirectTo: '/dashboard',
   pathMatch: 'full'
 },
+
+{
+  path: "cart",
+  component: CartComponent,
+
+}
 ];
 
 @NgModule({

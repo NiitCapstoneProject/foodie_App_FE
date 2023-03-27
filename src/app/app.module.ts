@@ -29,6 +29,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AddCuisineComponent } from './add-cuisine/add-cuisine.component';
 import { CuisineCardsComponent } from './cuisine-cards/cuisine-cards.component';
 import { CuisineDashboardComponent } from './cuisine-dashboard/cuisine-dashboard.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CuisineDashboardComponent } from './cuisine-dashboard/cuisine-dashboard
     NotFoundComponent,
     AddCuisineComponent,
     CuisineCardsComponent,
-    CuisineDashboardComponent
+    CuisineDashboardComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
