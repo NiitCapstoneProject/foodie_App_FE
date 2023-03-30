@@ -23,7 +23,7 @@ export class VendorComponent {
   get password(){return this.vendorForm.get("password")}
 
   onSubmit(){
-    this.user.email = "example@example.com"
+    this.user.email = "example1@example.com"
     this.user.password = this.vendorForm.value.password
     console.log(this.user)
     this.userService.vendor(this.user)

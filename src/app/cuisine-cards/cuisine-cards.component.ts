@@ -11,7 +11,10 @@ import { RestaurantService } from '../services/restaurant.service';
 export class CuisineCardsComponent {
   constructor(private service:RestaurantService,private userService:UserService){}
 
-    @Input() cuisine: Cuisine = {}
+    @Input() cuisine: Cuisine = {
+      price: 0,
+      quantity: 0
+    }
     addCart(){
       console.log(this.cuisine)
       this.service.addToCart(this.cuisine).subscribe(data=>{console.log(data+"sucess")

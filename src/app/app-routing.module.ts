@@ -1,3 +1,5 @@
+import { VendorRestaurantCardComponent } from './vendor-restaurant-card/vendor-restaurant-card.component';
+import { AddressComponent } from './address/address.component';
 import { OrderComponent } from './order/order.component';
 import { CartComponent } from './cart/cart.component';
 import { CuisineCardsComponent } from './cuisine-cards/cuisine-cards.component';
@@ -12,6 +14,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
+import { InfoResturantComponent } from './info-resturant/info-resturant.component';
+import { RestaurantEditComponent } from './restaurant-edit/restaurant-edit.component';
 
 
 const routes: Routes = [
@@ -75,12 +79,31 @@ const routes: Routes = [
 
 }
 ,
-
-
-
 {
   path: "order",
   component: OrderComponent,
+
+},
+
+
+{
+  path: "address",
+  component: AddressComponent,
+
+},
+{
+  path: "info",
+  component: InfoResturantComponent,
+
+},
+{
+  path: "vendorResturantEdit",
+  component: VendorRestaurantCardComponent,
+
+},
+{
+  path: "resturantForm",
+  component: RestaurantEditComponent,
 
 },
 {

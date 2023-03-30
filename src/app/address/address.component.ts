@@ -1,0 +1,22 @@
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-address',
+  templateUrl: './address.component.html',
+  styleUrls: ['./address.component.css']
+})
+export class AddressComponent {
+  addressForm = new FormGroup({
+    name: new FormControl('', Validators.required),
+    number: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[0-9]*$")]),
+    street: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    locality: new FormControl('', Validators.required),
+  });
+
+  onSubmit() {
+    // Handle form submission here
+    console.log(this.addressForm.value);
+  }
+}

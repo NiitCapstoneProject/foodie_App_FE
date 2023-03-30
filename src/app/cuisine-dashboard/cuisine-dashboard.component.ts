@@ -11,17 +11,24 @@ import { Cuisine } from '../models/cuisine';
 })
 export class CuisineDashboardComponent {
   cuisines: Cuisine[] = []
+  id:any
+  onOpen:boolean= false;
+  value:boolean=false;
   constructor(private route:Router,private restuarant :RestaurantService,private activate:ActivatedRoute){}
   ngOnInit(): void {
     this.activate.paramMap.subscribe(
       data => {
-        let id = data.get('id') ?? 0;
-        this.restuarant.getCuisine(+id).subscribe(
+       this.id = data.get('id') ?? 0;
+        this.restuarant.getCuisine(+this.id).subscribe(
           res => {
             this.cuisines = res
           }
         );
       }
     )
+  }
+  onChange(event:any){
+    console.log(event)
+    this.onOpen = event
   }
 }

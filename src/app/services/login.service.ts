@@ -10,7 +10,7 @@ import { User } from '../models/user';
 export class LoginService {
   isloggedIn:Boolean = false;
   token:any = ''
-  user:User ={}
+  user:User = {}
    constructor(private http:HttpClient,private route:Router) { }
 
    login(log:Login){

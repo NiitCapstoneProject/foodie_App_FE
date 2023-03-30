@@ -1,7 +1,13 @@
 <div>
-  <div>
-    restaurantinfornation <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero, illo dolores minima odio voluptas pariatur labore ea quaerat, officia quas facilis veritatis sit. Nemo, necessitatibus nihil iste alias quo illum.</p>
-  </div>
+  <app-info-resturant  (sending)="onChange($event)" [restaurantId] = "id"></app-info-resturant>
+</div>
+<hr class="my-4" />
+
+<div *ngIf="!onOpen">
+  <app-feedback [restaurantId] = "id"></app-feedback>
+</div>
+<!--
+<div>
   <div style="display: flex; justify-content: center;" >
     <button style="display: inherit;" type="button" class="btn btn-light" data-mdb-ripple-color="dark"><mat-icon>map</mat-icon><span>direction</span></button>
     <button style="display: inherit;" type="button" class="btn btn-light" data-mdb-ripple-color="dark"><mat-icon>bookmark</mat-icon>boolmark</button>
@@ -9,7 +15,9 @@
     <button style="display: inherit;" type="button" class="btn btn-light" data-mdb-ripple-color="dark"><mat-icon>phone</mat-icon>phone</button>
 
   </div>
-</div>
-<div style="margin-top: 30px;"  *ngFor="let cuisine of cuisines">
+</div> -->
+<div *ngIf="onOpen">
+<div  style="margin-top: 30px;"  *ngFor="let cuisine of cuisines"  >
   <app-cuisine-cards [cuisine]="cuisine" > </app-cuisine-cards>
+</div>
 </div>

@@ -18,6 +18,7 @@ export class RestaurantDashboardComponent {
 
 ngOnInit() {
    this.user.getRestaurant().subscribe({next:(data:any)=>{
+    console.log("resturant"+data)
     if(data!="")
     {
       this.restaurants = data
@@ -26,9 +27,9 @@ ngOnInit() {
 
 }
 
-change (){
-  console.log(this.rating3)
-}
+// change (){
+//   console.log(this.rating3)
+// }
 
 }
 

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Cuisine } from './../models/cuisine';
+import { Restaurant } from './../models/restaurant';
+import { Component, Input, OnInit } from '@angular/core';
 import { Order } from '../models/order';
 import { UserService } from '../services/user.service';
 
@@ -8,7 +10,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit{
-
+  @Input() restaurant: Restaurant={};
   orders:Order[]=[]
 constructor(private userService:UserService){}
   ngOnInit(): void {
@@ -17,4 +19,5 @@ constructor(private userService:UserService){}
     })
   }
 
+  cuisine:any 
 }

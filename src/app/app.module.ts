@@ -33,6 +33,15 @@ import { CartComponent } from './cart/cart.component';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { FormsModule} from '@angular/forms';
 import { OrderComponent } from './order/order.component';
+import { InfoResturantComponent } from './info-resturant/info-resturant.component';
+import { AddressComponent } from './address/address.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { RestaurantEditComponent } from './restaurant-edit/restaurant-edit.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { CuisineEditComponent } from './cuisine-edit/cuisine-edit.component';
+import { AddressEditComponent } from './address-edit/address-edit.component';
+import { VendorRestaurantDashboardComponent } from './vendor-restaurant-dashboard/vendor-restaurant-dashboard.component';
+import { VendorRestaurantCardComponent } from './vendor-restaurant-card/vendor-restaurant-card.component';
 
 
 @NgModule({
@@ -51,7 +60,16 @@ import { OrderComponent } from './order/order.component';
     CuisineCardsComponent,
     CuisineDashboardComponent,
     CartComponent,
-    OrderComponent
+    OrderComponent,
+    InfoResturantComponent,
+    AddressComponent,
+    FeedbackComponent,
+    RestaurantEditComponent,
+    UserEditComponent,
+    CuisineEditComponent,
+    AddressEditComponent,
+    VendorRestaurantDashboardComponent,
+    VendorRestaurantCardComponent
   ],
   imports: [
     BrowserModule,

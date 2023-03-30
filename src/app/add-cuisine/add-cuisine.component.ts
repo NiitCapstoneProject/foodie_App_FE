@@ -27,7 +27,10 @@ export class AddCuisineComponent {
 
   onSubmit() {
     console.log(this.cuisineForm.value);
-    let cuisine:Cuisine={};
+    let cuisine:Cuisine={
+      price: 0,
+      quantity: 0
+    };
     cuisine.name=this.cuisineForm.value.name;
     cuisine.rating=this.cuisineForm.value.rating;
     cuisine.price=this.cuisineForm.value.price;

@@ -1,0 +1,18 @@
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+  <label>Name:</label>
+  <input type="text" formControlName="name" />
+
+  <label>Mobile No. :</label>
+  <input type="text" formControlName="number" />
+
+  <label>Street:</label>
+  <input type="text" formControlName="street" />
+
+  <label>City:</label>
+  <input type="text" formControlName="city" />
+
+  <label>Locality:</label>
+  <input type="text" formControlName="locality" />
+
+  <button type="submit"[disabled]="addressForm.invalid">Submit</button>
+</form>

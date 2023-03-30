@@ -1,3 +1,4 @@
+import { Restaurant } from './../models/restaurant';
 import { Observable } from 'rxjs';
 import { User } from './../models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -68,5 +69,16 @@ export class UserService {
   }
   deleteCuisine(cuisine:Cuisine):Observable<any>{
     return this.http.post("http://localhost:9000/api/v1/delete/example1@example.com",cuisine)
+  }
+
+  setQuantity(cusine:Cuisine,quantity:number){
+    this.http.post("http://localhost:9000/api/v1/setQuantity/"+this.login.user.email+quantity,cusine)
+  }
+
+  removeFav(restaurantId:any):Observable<any>{
+   return this.http.delete("http://localhost:9000/api/v1/removeFavorite/"+this.login.user.email+restaurantId)
+  }
+  addFav(restaurantId:any):Observable<any>{
+   return this.http.post("http://localhost:9000/api/v1/favorite/"+this.login.user.email,restaurantId)
   }
 }
