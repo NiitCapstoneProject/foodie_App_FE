@@ -1,6 +1,8 @@
+import { Router } from '@angular/router';
+import { CityService } from './../services/city.service';
 import { Restaurant } from './../models/restaurant';
 import { UserService } from './../services/user.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,12 +10,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './add-restaurant.component.html',
   styleUrls: ['./add-restaurant.component.css']
 })
-export class AddRestaurantComponent {
+export class AddRestaurantComponent implements OnInit {
 
   image1:any;
   // form: FormGroup;
+  cities:String[]=[];
+  constructor(private fb: FormBuilder,private userService:UserService,private city1:CityService,private router:Router) {
 
-  constructor(private fb: FormBuilder,private userService:UserService) {}
+  }
+  ngOnInit(): void {
+    this.city1.getCity().subscribe(
+      res=> {
+        this.cities = res
+      }
+    )
+  }
 
   form:FormGroup|any = this.fb.group({
     name: ['', Validators.required],
@@ -41,6 +52,7 @@ export class AddRestaurantComponent {
   }
 
   submitForm() {
+    // console.log(this.form.value.city)
     if (this.form.invalid) {
       // this.snackBar.open('Please fill in all required fields', 'Dismiss', { duration: 3000 });
       return;
@@ -52,5 +64,6 @@ export class AddRestaurantComponent {
     restaurant.id = 209
     this.userService.addRestaurant(this.convert(restaurant));
     // Submit form data here
+
   }
 }

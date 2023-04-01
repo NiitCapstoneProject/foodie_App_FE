@@ -26,12 +26,14 @@
           <input matInput placeholder="Password" [formControl]="password" required type="password">
           <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+        <!-- <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button> -->
+        <button mat-raised-button color="danger" type="submit" *ngIf="loginForm.valid">Login</button>
+        <button mat-raised-button style="background-color: gray;" type="submit" [disabled] *ngIf="loginForm.invalid">Login</button>
       </div>
       <div>
         <p> Not a Registered User?</p><a routerLink="/register">Click Here</a>
       </div>
-      
+
     </form>
   </mat-card-content>
 </mat-card>

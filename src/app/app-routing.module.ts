@@ -1,3 +1,6 @@
+import { EditAddressFormComponent } from './edit-address-form/edit-address-form.component';
+import { CuisineEditComponent } from './cuisine-edit/cuisine-edit.component';
+import { VendorRestaurantDashboardComponent } from './vendor-restaurant-dashboard/vendor-restaurant-dashboard.component';
 import { VendorRestaurantCardComponent } from './vendor-restaurant-card/vendor-restaurant-card.component';
 import { AddressComponent } from './address/address.component';
 import { OrderComponent } from './order/order.component';
@@ -10,12 +13,13 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { VendorComponent } from './vendor/vendor.component';
 import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { InfoResturantComponent } from './info-resturant/info-resturant.component';
 import { RestaurantEditComponent } from './restaurant-edit/restaurant-edit.component';
+import { AddressEditComponent } from './address-edit/address-edit.component';
 
 
 const routes: Routes = [
@@ -57,7 +61,7 @@ const routes: Routes = [
 
 },
 {
-  path: "cuisine",
+  path: ":id/addCuisine",
   component: AddCuisineComponent,
 
 },
@@ -65,6 +69,10 @@ const routes: Routes = [
   path: "cuisineDashboard/:id",
   component: CuisineDashboardComponent,
 
+},
+{
+  path: "cuisineEdit",
+  component: CuisineEditComponent,
 },
 {
   path: "cuisineCard",
@@ -84,11 +92,18 @@ const routes: Routes = [
   component: OrderComponent,
 
 },
-
-
+{
+  path:"vendorRestaurantDashboard",
+  component: VendorRestaurantDashboardComponent,
+},
 {
   path: "address",
   component: AddressComponent,
+
+},
+{
+  path: "editAddressForm",
+  component: EditAddressFormComponent,
 
 },
 {
@@ -102,8 +117,19 @@ const routes: Routes = [
 
 },
 {
+  path: "vendorResturantdash",
+  component: VendorRestaurantDashboardComponent,
+
+},
+{
   path: "resturantForm",
   component: RestaurantEditComponent,
+
+}
+,
+{
+  path: "addressdash",
+  component: AddressEditComponent ,
 
 },
 {

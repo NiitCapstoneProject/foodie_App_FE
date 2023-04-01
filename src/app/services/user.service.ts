@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { Address } from './../models/address';
 import { Restaurant } from './../models/restaurant';
 import { Observable } from 'rxjs';
 import { User } from './../models/user';
@@ -14,13 +16,14 @@ import { Cuisine } from '../models/cuisine';
 export class UserService {
   totalAmount:any
 
-  constructor(private http: HttpClient,private login:LoginService) { }
+  constructor(private http: HttpClient,private login:LoginService,private router:Router) { }
   register(user:FormData){
     console.log(user)
     this.http.post("http://localhost:9000/api/v1/register",user).subscribe({
       next:(data:any)=>{
         if(data!="")
         {
+          this.router.navigateByUrl("/login")
           console.log(data)
         }
       }
@@ -44,15 +47,18 @@ export class UserService {
         // +this.login.token
       }
     );
-    this.http.post("http://localhost:9000/api/v1/user/restaurant/"+"example1@example.com",restaurant
+    this.http.post("http://localhost:9000/api/v1/user/restaurant/"+this.login.user.email,restaurant
     // this.login.user.email
     ,{headers:headers}
     ).subscribe(
-      res=>{console.log("added")}
+      async res=>{console.log("added");
+      let restaurant:Restaurant = res
+      this.router.navigateByUrl(restaurant.id+"/addCuisine")
+    }
     )
   }
-  addCuisine(cuisine:FormData){
-    this.http.post("http://localhost:9000/restaurant/cuisine/example1@example.com/0",cuisine).subscribe(
+  addCuisine(cuisine:FormData,restaurantId:any){
+    this.http.post("http://localhost:9000/restaurant/cuisine/"+this.login.user.email+"/"+restaurantId,cuisine).subscribe(
       res=>{console.log("cuisine method")}
     )
   }
@@ -68,17 +74,47 @@ export class UserService {
     return this.http.get("http://localhost:9000/api/v1/allOrders/example1@example.com")
   }
   deleteCuisine(cuisine:Cuisine):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/delete/example1@example.com",cuisine)
+    return this.http.post("http://localhost:9000/api/v1/delete/"+this.login.user.email,cuisine)
   }
 
-  setQuantity(cusine:Cuisine,quantity:number){
-    this.http.post("http://localhost:9000/api/v1/setQuantity/"+this.login.user.email+quantity,cusine)
+  setQuantity(cusine:Cuisine,quantity:number):Observable<any>{
+    return this.http.post("http://localhost:9000/api/v1/setQuantity/"+this.login.user.email+"/"+quantity,cusine)
   }
 
   removeFav(restaurantId:any):Observable<any>{
-   return this.http.delete("http://localhost:9000/api/v1/removeFavorite/"+this.login.user.email+restaurantId)
+   return this.http.delete("http://localhost:9000/api/v1/removeFavorite/"+this.login.user.email+"/"+restaurantId)
   }
   addFav(restaurantId:any):Observable<any>{
-   return this.http.post("http://localhost:9000/api/v1/favorite/"+this.login.user.email,restaurantId)
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+   return this.http.post("http://localhost:9000/api/v1/favorite/"+this.login.user.email,JSON.stringify(restaurantId),{ headers: headers })
+  //  +this.login.user.email,restaurantId)
   }
+
+
+  getAddress():Observable<any>{
+    return this.http.get("http://localhost:9000/api/v1/getAddress/"+this.login.user.email)
+  }
+
+  addAddress(address:Address):Observable<any>{
+    return this.http.post("http://localhost:9000/api/v1/address/"+this.login.user.email,address)
+  }
+
+  deleteAddress(id:string):Observable<any>{
+    return this.http.delete("http://localhost:9000/api/v1/delete/address/"+this.login.user.email+"/"+id)
+  }
+
+  updateAddress(address:Address):Observable<any>{
+   return this.http.put("http://localhost:9000/api/v1/editAddress/"+this.login.user.email,address)
+  }
+
+  getVendorRestaurant():Observable<any>{
+    return this.http.get("http://localhost:9000/api/v1/get/vendor/restaurant/"+this.login.user.email)
+  }
+  deleteRestaurantByVendor(restaurantId:any):Observable<any>{
+    return this.http.delete("http://localhost:9000/api/v1/deleteRestaurant/"+this.login.user.email+"/"+restaurantId)
+  }
+  updateRestaurantByVendor(restaurant:Restaurant):Observable<any>{
+    return this.http.put("http://localhost:9000/api/v1/updateRestaurant",restaurant)
+  }
+
 }

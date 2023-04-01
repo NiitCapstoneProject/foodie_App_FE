@@ -1,3 +1,4 @@
+import { CityService } from './../services/city.service';
 import { UserService } from './../services/user.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Restaurant } from '../models/restaurant';
@@ -11,11 +12,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class RestaurantDashboardComponent {
 
   rating3: number;
-  constructor(private user:UserService,private fb: FormBuilder){
+  constructor(private user:UserService,private fb: FormBuilder,private city:CityService){
     this.rating3 = 0;
   }
   restaurants: Restaurant[] = []
-
+  cities:string[] = []
 ngOnInit() {
    this.user.getRestaurant().subscribe({next:(data:any)=>{
     console.log("resturant"+data)
@@ -24,7 +25,11 @@ ngOnInit() {
       this.restaurants = data
     }
   }})
-
+  this.city.getCity().subscribe(
+    res=> {
+      this.cities = res
+    }
+  )
 }
 
 // change (){

@@ -2,7 +2,7 @@
 export type Cuisine={
   id?:string,
   name?:string,
-  rating?:number,
+  description?:string,
   price:number,
   type?:string,
   quantity:number,

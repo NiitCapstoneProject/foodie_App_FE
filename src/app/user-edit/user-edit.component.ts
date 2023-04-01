@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-edit',
@@ -7,16 +7,26 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent {
+  registerForm: FormGroup|any;
 
   constructor(private fb:FormBuilder){}
-  form:FormGroup|any = this.fb.group({
-    name: ['', Validators.required],
-    description: ['', Validators.required],
-    city: ['', Validators.required],
-    image: ['', Validators.required],
-  });
-  submitForm(){
-    console.log(this.form.value)
+  ngOnInit() {
+    this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      phoneNo: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      name: ['', [Validators.required]],
+      dob: ['', [Validators.required]],
+      image:[''],
+    }
+
+    );
+  }
+
+  submitForm(){}
+
+  onSubmit() {
+
+    console.log(this.registerForm.value)
   }
   onFileSelected(event:any){
   }

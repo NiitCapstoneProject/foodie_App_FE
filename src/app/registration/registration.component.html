@@ -52,7 +52,10 @@
         <div>
 
 
-        <button mat-raised-button color="primary" [disabled]="!registerForm.valid" type="submit">Register</button>
+        <!-- <button mat-raised-button color="primary" [disabled]="!registerForm.valid" type="submit">Register</button>
+         -->
+         <button mat-raised-button color="danger" type="submit" *ngIf="registerForm.valid">register</button>
+         <button mat-raised-button style="background-color: gray;" type="submit" [disabled] *ngIf="registerForm.invalid">register</button>
 
       </div>
 

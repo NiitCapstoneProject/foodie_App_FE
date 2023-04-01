@@ -15,22 +15,22 @@ import { LoginService } from '../services/login.service';
 export class InfoResturantComponent implements OnInit {
   @Input() restaurantId:any
   restaurant: Restaurant={} ;
- rating3: number;
+  rating3:any = 0
+
  text:string="";
  value:boolean=true;
 
   constructor(private user:UserService,private fb: FormBuilder,private login:LoginService,private activate:ActivatedRoute,private restaurantService:RestaurantService){
-    this.rating3 = 4
-
   }
 
   isLiked:boolean = false;
-
+  hover1:boolean = false;
   ngOnInit() {
     console.log("resturantid"+this.restaurantId)
         this.restaurantService.getResturantById(this.restaurantId).subscribe(
        res=>{console.log(res+"resturant");
             this.restaurant=res
+            this.rating3 = res.rating
       },err=>{console.log("not found resturant id")}
         );
       if(this.login.isloggedIn){
@@ -38,7 +38,8 @@ export class InfoResturantComponent implements OnInit {
         this.isLiked = data
       }}
 
-      )}
+      )
+    }
   }
   feedback(data:any){
     console.log(data+"datahere");
@@ -49,6 +50,11 @@ export class InfoResturantComponent implements OnInit {
   }
   change (){
     console.log(this.rating3)
+    this.restaurantService.addRating(this.restaurantId,this.rating3).subscribe(
+      res=>{
+        console.log("working")
+      }
+    )
   }
 
   unlike(){this.isLiked = false;
@@ -59,8 +65,27 @@ export class InfoResturantComponent implements OnInit {
   })
   }
 
-  hover(){
+  hover2(){
+    if(this.login.user.email){
+      this.hover1 = true
+      this.restaurantService.getRating(this.restaurantId).subscribe(
+        res=>{
+          console.log("Rating "+res)
+          this.rating3 = res
+        }
+      )
+    }
+  }
 
+
+  leave1(){
+    
+    this.hover1 = false
+    this.restaurantService.getResturantById(this.restaurantId).subscribe(
+      res=>{console.log(res+"resturant");
+           this.restaurant=res
+           this.rating3 = res.rating
+     })
   }
   @Output()
   sending:EventEmitter<boolean>=new EventEmitter<boolean>();

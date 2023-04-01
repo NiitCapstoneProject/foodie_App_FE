@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { Cuisine } from '../models/cuisine';
 import { Order } from '../models/order';
@@ -11,7 +12,7 @@ import { UserService } from '../services/user.service';
 })
 export class CartComponent {
   order1:Order={}
-  constructor(private service:RestaurantService,private userService:UserService){}
+  constructor(private service:RestaurantService,private userService:UserService,private router:Router){}
   total = 0
 
 
@@ -39,6 +40,9 @@ console.log(data);
 setQuantity(cuisine:Cuisine){
   console.log(cuisine)
   console.log(cuisine.quantity)
+  this.userService.setQuantity(cuisine,cuisine.quantity).subscribe(
+    
+  )
 }
 
 
@@ -54,14 +58,6 @@ incrementQuantity(cuisine:Cuisine) {
   this.setQuantity(cuisine)
 }
 
-
-  // delete(result:Cuisine){
-  //   // console.log(result.id)
-  //   this.userService.deleteCuisine(result).subscribe(data=>{
-  //     this.ngOnInit()
-  //   })
-  // }
-
   order(){
 
     this.order1.cuisines=this.cuisines;
@@ -69,5 +65,7 @@ incrementQuantity(cuisine:Cuisine) {
       alert("Your bill amount: "+data.totalBillAmount)
       console.log(data);
     })
+    this.router.navigateByUrl("addressdash")
   }
+
 }

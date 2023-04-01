@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class CityService {
 
+  cities:String[]=[];
   constructor(private http:HttpClient) { }
 
   getCity():Observable<any>{

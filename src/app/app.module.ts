@@ -42,6 +42,8 @@ import { CuisineEditComponent } from './cuisine-edit/cuisine-edit.component';
 import { AddressEditComponent } from './address-edit/address-edit.component';
 import { VendorRestaurantDashboardComponent } from './vendor-restaurant-dashboard/vendor-restaurant-dashboard.component';
 import { VendorRestaurantCardComponent } from './vendor-restaurant-card/vendor-restaurant-card.component';
+import {MatSelectModule} from '@angular/material/select';
+import { EditAddressFormComponent } from './edit-address-form/edit-address-form.component';
 
 
 @NgModule({
@@ -69,7 +71,8 @@ import { VendorRestaurantCardComponent } from './vendor-restaurant-card/vendor-r
     CuisineEditComponent,
     AddressEditComponent,
     VendorRestaurantDashboardComponent,
-    VendorRestaurantCardComponent
+    VendorRestaurantCardComponent,
+    EditAddressFormComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,7 @@ import { VendorRestaurantCardComponent } from './vendor-restaurant-card/vendor-r
     MatToolbarModule,
     MatIconModule,
     MatCardModule,MatFormFieldModule,MatDatepickerModule,MatNativeDateModule,MatInputModule, HttpClientModule,
-    ReactiveFormsModule,MatSidenavModule,MatListModule,MatMenuModule,MatCheckboxModule, NgxStarRatingModule,FormsModule
+    ReactiveFormsModule,MatSidenavModule,MatListModule,MatMenuModule,MatCheckboxModule, NgxStarRatingModule,FormsModule,MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

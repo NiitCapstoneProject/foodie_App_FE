@@ -20,14 +20,12 @@
             Decription:{{restaurant.description}}
           </p>
           <hr class="my-4" />
-          <button type="button" class="btn btn-primary">
-            see address
-          </button>
+
           <button type="button" class="btn btn-primary" (click)="onClick(true)" >
-            menu
+            Menu
           </button>
           <button type="button" class="btn btn-primary" (click)="onClick(false)">
-            see feedback
+            Feedback
           </button>
         </div>
       </div>
@@ -36,11 +34,19 @@
         <div class="normal1" style="    display: flex;margin-bottom: 4rem;
         align-items: center;
         justify-content: space-around;">
-          <div class="count">
+          <div class="count"  (mouseover)="hover2()"  (mouseout)="leave1()" *ngIf="!hover1">
+            <div class="stars">
+              <ngx-star-rating [(ngModel)]="rating3" [id]="'rating3'" >
+               <!-- (click)="change()" -->
+               </ngx-star-rating>
+            </div>
+            <div class="rate">Rating: {{ rating3 }}</div>
+          </div>
+          <div class="count" (mouseover)="hover2()" (mouseout)="leave1()" *ngIf="hover1">
             <div class="stars">
               <ngx-star-rating [(ngModel)]="rating3" [id]="'rating3'" (click)="change()"></ngx-star-rating>
             </div>
-            <div class="rate">Rating: {{ rating3 }}</div>
+            <div class="rate">Your Rating: {{ rating3 }}</div>
           </div>
 
           <div class="buttons">

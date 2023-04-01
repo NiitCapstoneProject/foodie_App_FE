@@ -5,4 +5,5 @@ export type User = {
     name?:string,
     dob?:string,
     image?:string
+    vendor?:boolean
 }
