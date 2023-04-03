@@ -1,3 +1,9 @@
+import { VendorGuard } from './services/vendor.guard';
+import { FavouriteDashboardComponent } from './favourite-dashboard/favourite-dashboard.component';
+import { FavouriteCardComponent } from './favourite-card/favourite-card.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './auth.guard';
+import { VendorCusisineDashboardComponent } from './vendor-cusisine-dashboard/vendor-cusisine-dashboard.component';
 import { EditAddressFormComponent } from './edit-address-form/edit-address-form.component';
 import { CuisineEditComponent } from './cuisine-edit/cuisine-edit.component';
 import { VendorRestaurantDashboardComponent } from './vendor-restaurant-dashboard/vendor-restaurant-dashboard.component';
@@ -20,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { InfoResturantComponent } from './info-resturant/info-resturant.component';
 import { RestaurantEditComponent } from './restaurant-edit/restaurant-edit.component';
 import { AddressEditComponent } from './address-edit/address-edit.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 
 const routes: Routes = [
@@ -35,34 +42,47 @@ const routes: Routes = [
   path: "register",
   component: RegistrationComponent,
 
+},
+{
+  path: "userEdit",
+  component: UserEditComponent,
+  canActivate:[AuthGuard]
+
 }
 ,
 {
   path: "addRestaurant",
   component: AddRestaurantComponent,
-
+  canActivate:[AuthGuard]
 }
 ,
 {
   path: "vendor",
   component: VendorComponent,
-
+  canActivate:[AuthGuard]
 }
 ,
 {
   path: "notFound",
   component: NotFoundComponent,
 
+
 }
 ,
 {
   path: "dashboard",
+  component: DashboardComponent,
+
+},
+{
+  path: ":id/restaurantDashboard",
   component: RestaurantDashboardComponent,
 
 },
 {
   path: ":id/addCuisine",
   component: AddCuisineComponent,
+  canActivate:[AuthGuard]
 
 },
 {
@@ -70,13 +90,27 @@ const routes: Routes = [
   component: CuisineDashboardComponent,
 
 },
+
 {
-  path: "cuisineEdit",
-  component: CuisineEditComponent,
+  path: "vendorcuisineDashboard/:id",
+  component: VendorCusisineDashboardComponent,
+  canActivate:[AuthGuard]
+
 },
+{
+  path: "VendorcuisineForm/:id/cuisineId/:cuisineId",
+  component: CuisineEditComponent,
+  canActivate:[VendorGuard]
+},
+// {
+//   path: "VendorcuisineForm/:id",
+//   component: CuisineEditComponent,
+//   canActivate:[AuthGuard]
+// },
 {
   path: "cuisineCard",
   component: CuisineCardsComponent,
+
 
 },
 
@@ -84,26 +118,31 @@ const routes: Routes = [
 {
   path: "cart",
   component: CartComponent,
+  canActivate:[AuthGuard]
 
 }
 ,
 {
   path: "order",
   component: OrderComponent,
+  canActivate:[AuthGuard]
 
 },
 {
   path:"vendorRestaurantDashboard",
   component: VendorRestaurantDashboardComponent,
+  canActivate:[VendorGuard]
 },
 {
   path: "address",
   component: AddressComponent,
+  canActivate:[AuthGuard]
 
 },
 {
   path: "editAddressForm",
   component: EditAddressFormComponent,
+  canActivate:[AuthGuard]
 
 },
 {
@@ -114,22 +153,32 @@ const routes: Routes = [
 {
   path: "vendorResturantEdit",
   component: VendorRestaurantCardComponent,
+  canActivate:[VendorGuard]
 
 },
-{
-  path: "vendorResturantdash",
-  component: VendorRestaurantDashboardComponent,
+// {
+//   path: "vendorResturantdash",
+//   component: VendorRestaurantDashboardComponent,
+//   canActivate:[AuthGuard]
 
-},
+// },
 {
-  path: "resturantForm",
+  path: ":id/resturantEditForm",
   component: RestaurantEditComponent,
+  canActivate:[VendorGuard]
 
 }
 ,
 {
   path: "addressdash",
   component: AddressEditComponent ,
+  canActivate:[AuthGuard]
+
+},
+{
+  path: "favorite",
+  component: FavouriteDashboardComponent ,
+  canActivate:[AuthGuard]
 
 },
 {

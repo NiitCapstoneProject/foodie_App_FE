@@ -4,6 +4,7 @@ import { Cuisine } from '../models/cuisine';
 import { Order } from '../models/order';
 import { RestaurantService } from '../services/restaurant.service';
 import { UserService } from '../services/user.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,7 @@ import { UserService } from '../services/user.service';
 })
 export class CartComponent {
   order1:Order={}
-  constructor(private service:RestaurantService,private userService:UserService,private router:Router){}
+  constructor(private service:RestaurantService,private userService:UserService,private router:Router,private cart: CartService){}
   total = 0
 
 
@@ -35,13 +36,19 @@ this.userService.deleteCuisine(result).subscribe(data=>{
 this.total=0;
 this.ngOnInit();
 console.log(data);
+this.userService.getCartItems().subscribe(
+  res=>{
+    // this.cartLength = res
+    this.cart.cartLength = Number(res)
+  }
+)
 })
 }
 setQuantity(cuisine:Cuisine){
   console.log(cuisine)
   console.log(cuisine.quantity)
   this.userService.setQuantity(cuisine,cuisine.quantity).subscribe(
-    
+
   )
 }
 
@@ -62,10 +69,18 @@ incrementQuantity(cuisine:Cuisine) {
 
     this.order1.cuisines=this.cuisines;
     this.userService.placeOrder(this.order1).subscribe(data=>{
-      alert("Your bill amount: "+data.totalBillAmount)
+      // alert("Your bill amount: "+data.totalBillAmount)
+    this.router.navigateByUrl("/addressdash")
+
       console.log(data);
+      this.userService.getCartItems().subscribe(
+        res=>{
+          // this.cartLength = res
+          console.log(res)
+          this.cart.cartLength = Number(res)
+        }
+      )
     })
-    this.router.navigateByUrl("addressdash")
   }
 
 }

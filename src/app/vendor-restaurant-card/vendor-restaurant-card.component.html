@@ -6,11 +6,11 @@
           <div class="card-body">
             <div class="row">
               <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
-                <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                <div  class="bg-image hover-zoom ripple rounded ripple-surface">
                   <!-- image will come here -->
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(4).webp"
-                    class="w-100" />
-                  <a href="#!">
+                  <img style="height: 180px;width: 180px;;" src="http://localhost:9000/image/getimage/{{restaurant1.image}}"
+                    class="w-100"  />
+                  <a (click)="click()" >
                     <div class="hover-overlay">
                       <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
                     </div>
@@ -38,7 +38,7 @@
                 <!-- <h6 class="text-success">Free shipping</h6> -->
                 <div style="align-items: center;" class="d-flex flex-column ">
                   <div class="d-flex flex-column ">
-                    <a routerLink="/editform">
+                    <a >
                       <button class="btn btn-outline-danger btn-sm mt-2" type="button" (click)="editRestaurant()">
                         Edit
                       </button>

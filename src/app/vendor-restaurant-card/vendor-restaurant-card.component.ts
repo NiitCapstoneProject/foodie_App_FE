@@ -21,10 +21,15 @@ export class VendorRestaurantCardComponent implements OnInit {
     )
   }
   delRestaurant(Id:any){this.userService.deleteRestaurantByVendor(Id).subscribe(res=>{console.log("deleted");
+
   },err=>{console.log("notDeleted");
   })}
-  editRestaurant(){this.router.navigateByUrl("/resturantForm")
-
+  editRestaurant(){
+    console.log(this.restaurantId)
+    this.router.navigateByUrl(String(this.restaurantId)+"/resturantEditForm")
+  }
+  click(){
+    this.router.navigateByUrl("/vendorcuisineDashboard/"+this.restaurantId)
   }
 
 }

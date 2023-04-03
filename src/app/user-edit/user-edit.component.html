@@ -97,8 +97,8 @@
 
         <div style="margin: 20%; margin-top: 5%; margin-bottom: 10%;"  class="row d-flex justify-content-center align-items-center ">
           <div style="position: relative;">
-              <img style="border-radius: 50%;" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                  alt="Generic placeholder image" class="img-fluid img-thumbnail ">
+              <img style="border-radius: 50%;" src="http://localhost:9000/image/getimage/{{user.image}}"
+                  alt="Generic placeholder image" class="img-fluid img-thumbnail profile-image" id="profile-img">
               <button type="button" class="btn btn-outline-dark" (click)="fileInput.click()" data-mdb-ripple-color="dark"
                   style="       border: none;
                   position: absolute;
@@ -111,11 +111,11 @@
           </div>
       </div>
 
-  <input type="file"  formControlName="image" #fileInput hidden>
+  <input type="file"  formControlName="image" #fileInput hidden (change)="updateImage($event)">
 
 <form [formGroup]="registerForm" (ngSubmit)="submitForm()">
   <mat-form-field>
-    <input matInput placeholder="Email" formControlName="email">
+    <input matInput placeholder="{{user.email}}" formControlName="email" [readonly]="true">
     <mat-error *ngIf="registerForm.get('email').hasError('required')">Email is required</mat-error>
     <mat-error *ngIf="registerForm.get('email').hasError('email')">Email must be a valid </mat-error>
   </mat-form-field>

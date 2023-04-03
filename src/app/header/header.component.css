@@ -29,7 +29,7 @@
 }
 
 .dropdown-menu {
-  background-color: #dc3545;
+  background-color: white;
   border: none;
 }
 
@@ -92,9 +92,10 @@
 }
 
 .dropdown-menu-end a {
-  color: #fff !important;
+  color: black !important;
 }
 
 .dropdown-divider {
   border-top-color: rgba(255,255,255,.1);
 }
+

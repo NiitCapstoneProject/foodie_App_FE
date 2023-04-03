@@ -55,23 +55,28 @@
 
     <div class="search-container d-flex align-items-center">
        <div class="city-select me-2">
-        <select style="border-radius: 50px 0px 0px 50px; border: groove;    width: 8rem;"  class="form-select " onchange="onMenuChange(event)">
+        <select [(ngModel)]="currentCity" [ngModelOptions]="{standalone: true}" style="border-radius: 50px 0px 0px 50px; border: groove;    width: 8rem;"  class="form-select " (change)="onMenuChange($event)">
           <option *ngFor="let city of cities" value="{{city}}">{{city}}</option>
         </select>
        </div>
 
 
-      <input style="    border: groove; color: black;" id="hove" class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+      <input style="    border: groove; color: black;" id="hove" class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" [(ngModel)]="binding" name="search">
 
-      <button style="border-radius: 0px 50px 50px 0px; border: groove;" class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+      <button style="border-radius: 0px 50px 50px 0px; border: groove;" class="btn btn-light" type="submit" (click)="search()"><i class="fas fa-search" ></i></button>
     </div>
   </form>
 </div>
 
+<div  style="justify-content: center;align-items: center; display: flex;" *ngIf="restaurants.length == 0">
+<span>
+    Not Found!! please check your input
+</span>
+
+</div>
 
 
-
-<div class="restaurant-grid">
+<div class="restaurant-grid" *ngIf="restaurants.length > 0">
   <div  *ngFor="let restaurant of restaurants">
     <app-restaurant-cards [restaurant]="restaurant" > </app-restaurant-cards>
   </div>

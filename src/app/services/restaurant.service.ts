@@ -22,10 +22,10 @@ export class RestaurantService {
     this.http.get("http://localhost:9000/restaurant/find/"+name)
   }
   addToCart(cuisine:Cuisine):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/cart/example1@example.com",cuisine)
+    return this.http.post("http://localhost:9000/api/v1/cart/"+localStorage.getItem("email"),cuisine)
    }
    getCartData():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/cartList/example1@example.com")
+    return this.http.get("http://localhost:9000/api/v1/cartList/"+localStorage.getItem("email"))
    }
    getResturantById(id:any):Observable<any>{
     console.log("I am working "+id )
@@ -38,16 +38,16 @@ export class RestaurantService {
     return this.http.get("http://localhost:9000/restaurant/feedbacks/"+restaurantId)
   }
 
-  getIfLiked(id:any,restaurantId:any){
-    return this.http.get("http://localhost:9000/api/v1/getFavorites/example1@example.com/200")
+  getIfLiked(restaurantId:any){
+    return this.http.get("http://localhost:9000/api/v1/getFavorites/"+localStorage.getItem('email')+"/"+restaurantId)
     // +id+"/"+restaurantId)
   }
 
   addRating(restaurantId:any,rating:any):Observable<any>{
-   return this.http.post("http://localhost:9000/restaurant/addRating/"+this.login.user.email+"/"+restaurantId,rating)
+   return this.http.post("http://localhost:9000/restaurant/addRating/"+localStorage.getItem('email')+"/"+restaurantId,rating)
   }
   getRating(restaurantId:any):Observable<any>{
-    return this.http.get("http://localhost:9000/restaurant/getRating/"+this.login.user.email+"/"+restaurantId)
+    return this.http.get("http://localhost:9000/restaurant/getRating/"+localStorage.getItem('email')+"/"+restaurantId)
   }
 
   deleteCuisineByVendor(restaurantId:any,cuisineId:any):Observable<any>{
@@ -55,5 +55,22 @@ export class RestaurantService {
   }
   updateCuisineByVendor(restaurantId:any,cusisine:Cuisine):Observable<any>{
     return this.http.put("http://localhost:9000/restaurant/updateCuisine/"+restaurantId,cusisine)
+  }
+  findRestaurantBycityAndName(name:string,city:string):Observable<any>{
+    return this.http.get("http://localhost:9000/restaurant/find/"+name+"/"+city)
+  }
+
+  findRestaurantBycity(city:string):Observable<any>{
+    return this.http.get("http://localhost:9000/restaurant/byCity/"+city)
+  }
+  updateImage(id:any,image:any){
+    const formdata = new FormData();
+    formdata.append('image', image);
+    return this.http.put("http://localhost:9000/api/v1/image/update/image/"+id,formdata)
+  }
+  getCuisineById(id:any,cuisineId:string){
+    // http://localhost:9000/restaurant/getCuisine/1/1Mutton Biryani
+    return this.http.get("http://localhost:9000/restaurant/getCuisine/"+id+"/"+cuisineId)
+
   }
 }

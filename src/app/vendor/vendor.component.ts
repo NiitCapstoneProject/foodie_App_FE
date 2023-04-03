@@ -23,9 +23,18 @@ export class VendorComponent {
   get password(){return this.vendorForm.get("password")}
 
   onSubmit(){
-    this.user.email = "example1@example.com"
+    this.user.email = String(localStorage.getItem('email'))
     this.user.password = this.vendorForm.value.password
     console.log(this.user)
     this.userService.vendor(this.user)
+  }
+
+  vendor1():boolean{
+    if(localStorage.getItem('vendor') == "true"){
+      console.log('true working')
+      return true
+    }
+    console.log("Hum Kam nahi krra")
+    return false
   }
 }

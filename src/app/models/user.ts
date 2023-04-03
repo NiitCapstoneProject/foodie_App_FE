@@ -4,6 +4,6 @@ export type User = {
     phoneNo?:string,
     name?:string,
     dob?:string,
-    image?:string
+    image?:number
     vendor?:boolean
 }

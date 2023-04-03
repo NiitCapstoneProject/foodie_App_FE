@@ -16,6 +16,8 @@
 
   <button type="submit"[disabled]="addressForm.invalid">Submit</button>
 </form> -->
+<mat-card>
+
 <mat-card-title>Update address</mat-card-title>
 
 <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
@@ -50,3 +52,4 @@
          <button mat-raised-button style="background-color: gray;" type="submit" [disabled] *ngIf="addressForm.invalid">Submit</button>
 </form>
 
+</mat-card>

@@ -33,7 +33,7 @@ export class LoginComponent {
     // console.log(user)
     this.login.login(user)
     console.log(this.login.user)
-    // // this.route.navigateByUrl('/song')
+    this.route.navigateByUrl('/dashboard')
   }
   get email(){
     return this.loginForm.get('email')

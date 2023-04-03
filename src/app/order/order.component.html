@@ -18,6 +18,7 @@
       <div class="col-md-10">
           <div class="rounded">
               <div class="table-responsive table-borderless">
+                <h2>Order List</h2>
                   <table class="table">
                       <thead>
                           <tr>
@@ -27,8 +28,7 @@
                                   </div>
                               </th> -->
                               <!-- <th>Order #</th> -->
-                              <th>Resturant name</th>
-                              <th>City</th>
+
                               <th>Time</th>
                               <th>Total</th>
                               <th>Date</th>
@@ -41,10 +41,10 @@
                                       <div class="inner-circle"></div>
                                   </div>
                               </td> -->
-                               <tr class="cell-1" *ngFor="let value of orders" >
-                                 <!-- <td>#SO-13487</td> -->
-                                 <td>{{restaurant.name}}</td>
-                                 <td>{{restaurant.city}}</td>
+
+
+                                 <tr class="cell-1" *ngFor="let value of orders" >
+
                                   <td>{{value.time}}</td>
                                   <td>₹ {{value.totalBillAmount}}</td>
                                   <td>{{value.date}}</td>

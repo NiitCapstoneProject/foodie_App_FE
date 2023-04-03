@@ -26,6 +26,18 @@ export class InfoResturantComponent implements OnInit {
   isLiked:boolean = false;
   hover1:boolean = false;
   ngOnInit() {
+    console.log("kam kr")
+    if( localStorage.getItem("isLoggedIn")=="true" ){
+      console.log("Kam kr")
+      this.restaurantService.getIfLiked(this.restaurantId).subscribe( {next:(data:any)=>{
+        console.log("like"+ data)
+      this.isLiked = data
+    }}
+
+    )
+  }
+
+
     console.log("resturantid"+this.restaurantId)
         this.restaurantService.getResturantById(this.restaurantId).subscribe(
        res=>{console.log(res+"resturant");
@@ -33,20 +45,17 @@ export class InfoResturantComponent implements OnInit {
             this.rating3 = res.rating
       },err=>{console.log("not found resturant id")}
         );
-      if(this.login.isloggedIn){
-      this.restaurantService.getIfLiked(this.login.user.email,this.restaurantId).subscribe( {next:(data:any)=>{
-        this.isLiked = data
-      }}
 
-      )
-    }
   }
   feedback(data:any){
     console.log(data+"datahere");
     let feedback1:Feedback ={}
-    feedback1.user=this.login.user.email
-    feedback1.feedback =data
-    this.restaurantService.addFeedback(feedback1,this.restaurantId).subscribe(res=>{console.log("sucess")},err=>{console.log("error")})
+    feedback1.user= String(localStorage.getItem("email"))
+    feedback1.feedback = data
+    feedback1.image = Number(localStorage.getItem("image"))
+    this.restaurantService.addFeedback(feedback1,this.restaurantId).subscribe( {next:(res:any)=>{console.log("sucess")
+    this.text = ""
+  }})
   }
   change (){
     console.log(this.rating3)
@@ -66,7 +75,7 @@ export class InfoResturantComponent implements OnInit {
   }
 
   hover2(){
-    if(this.login.user.email){
+    if( localStorage.getItem("isLoggedIn")=="true" ){
       this.hover1 = true
       this.restaurantService.getRating(this.restaurantId).subscribe(
         res=>{
@@ -79,7 +88,7 @@ export class InfoResturantComponent implements OnInit {
 
 
   leave1(){
-    
+
     this.hover1 = false
     this.restaurantService.getResturantById(this.restaurantId).subscribe(
       res=>{console.log(res+"resturant");

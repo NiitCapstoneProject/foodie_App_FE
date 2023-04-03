@@ -14,11 +14,13 @@ import { Cuisine } from '../models/cuisine';
   providedIn: 'root'
 })
 export class UserService {
+  loginID:any
   totalAmount:any
 
   constructor(private http: HttpClient,private login:LoginService,private router:Router) { }
   register(user:FormData){
     console.log(user)
+
     this.http.post("http://localhost:9000/api/v1/register",user).subscribe({
       next:(data:any)=>{
         if(data!="")
@@ -35,6 +37,8 @@ export class UserService {
       next:(data:any)=>{
         if(data!="")
         {
+          localStorage.setItem("vendor","true")
+          this.router.navigateByUrl("/vendorRestaurantDashboard")
           console.log(data)
         }
       }
@@ -47,7 +51,7 @@ export class UserService {
         // +this.login.token
       }
     );
-    this.http.post("http://localhost:9000/api/v1/user/restaurant/"+this.login.user.email,restaurant
+    this.http.post("http://localhost:9000/api/v1/user/restaurant/"+localStorage.getItem('email'),restaurant
     // this.login.user.email
     ,{headers:headers}
     ).subscribe(
@@ -58,7 +62,7 @@ export class UserService {
     )
   }
   addCuisine(cuisine:FormData,restaurantId:any){
-    this.http.post("http://localhost:9000/restaurant/cuisine/"+this.login.user.email+"/"+restaurantId,cuisine).subscribe(
+    this.http.post("http://localhost:9000/restaurant/cuisine/"+localStorage.getItem('email')+"/"+restaurantId,cuisine).subscribe(
       res=>{console.log("cuisine method")}
     )
   }
@@ -68,53 +72,85 @@ export class UserService {
   }
 
   placeOrder(order:Order):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/example1@example.com/order",order)
+    return this.http.post("http://localhost:9000/api/v1/"+localStorage.getItem('email')+"/order",order)
   }
   getOrders():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/allOrders/example1@example.com")
+    return this.http.get("http://localhost:9000/api/v1/allOrders/"+localStorage.getItem('email'))
   }
   deleteCuisine(cuisine:Cuisine):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/delete/"+this.login.user.email,cuisine)
+    return this.http.post("http://localhost:9000/api/v1/delete/"+localStorage.getItem('email'),cuisine)
   }
 
   setQuantity(cusine:Cuisine,quantity:number):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/setQuantity/"+this.login.user.email+"/"+quantity,cusine)
+    return this.http.post("http://localhost:9000/api/v1/setQuantity/"+localStorage.getItem('email')+"/"+quantity,cusine)
   }
 
   removeFav(restaurantId:any):Observable<any>{
-   return this.http.delete("http://localhost:9000/api/v1/removeFavorite/"+this.login.user.email+"/"+restaurantId)
+   return this.http.delete("http://localhost:9000/api/v1/removeFavorite/"+localStorage.getItem('email')+"/"+restaurantId)
   }
   addFav(restaurantId:any):Observable<any>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-   return this.http.post("http://localhost:9000/api/v1/favorite/"+this.login.user.email,JSON.stringify(restaurantId),{ headers: headers })
+   return this.http.post("http://localhost:9000/api/v1/favorite/"+localStorage.getItem('email'),JSON.stringify(restaurantId),{ headers: headers })
   //  +this.login.user.email,restaurantId)
   }
 
 
   getAddress():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/getAddress/"+this.login.user.email)
+    return this.http.get("http://localhost:9000/api/v1/getAddress/"+localStorage.getItem('email'))
   }
 
   addAddress(address:Address):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/address/"+this.login.user.email,address)
+    return this.http.post("http://localhost:9000/api/v1/address/"+localStorage.getItem('email'),address)
   }
 
   deleteAddress(id:string):Observable<any>{
-    return this.http.delete("http://localhost:9000/api/v1/delete/address/"+this.login.user.email+"/"+id)
+    return this.http.delete("http://localhost:9000/api/v1/delete/address/"+localStorage.getItem('email')+"/"+id)
   }
 
   updateAddress(address:Address):Observable<any>{
-   return this.http.put("http://localhost:9000/api/v1/editAddress/"+this.login.user.email,address)
+   return this.http.put("http://localhost:9000/api/v1/editAddress/"+localStorage.getItem('email'),address)
   }
 
   getVendorRestaurant():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/get/vendor/restaurant/"+this.login.user.email)
+    return this.http.get("http://localhost:9000/api/v1/get/vendor/restaurant/"+localStorage.getItem('email'))
   }
   deleteRestaurantByVendor(restaurantId:any):Observable<any>{
-    return this.http.delete("http://localhost:9000/api/v1/deleteRestaurant/"+this.login.user.email+"/"+restaurantId)
+    return this.http.delete("http://localhost:9000/api/v1/deleteRestaurant/"+localStorage.getItem('email')+"/"+restaurantId)
   }
   updateRestaurantByVendor(restaurant:Restaurant):Observable<any>{
     return this.http.put("http://localhost:9000/api/v1/updateRestaurant",restaurant)
   }
+  getUser():Observable<any>{
+    const headers = new HttpHeaders (
+      {
+       "authorization" : "Bearer "+ localStorage.getItem("token")
+      }
+    );
+    return this.http.get("http://localhost:9000/api/v1/user/"+localStorage.getItem('email'),{headers:headers})
+  }
+  updateUser(user:User):Observable<any>{
+    const headers = new HttpHeaders (
+      {
+       "authorization" : "Bearer "+ localStorage.getItem("token")
+      }
+    );
+    return this.http.put("http://localhost:9000/api/v1/user/update",user,{headers:headers})
+  }
 
+
+  updateImage(id:any,image:any){
+    const formdata = new FormData();
+    formdata.append('image', image);
+    return this.http.put("http://localhost:9000/api/v1/image/update/image/"+id,formdata)
+  }
+
+  getCartItems(){
+    return this.http.get("http://localhost:9000/api/v1/cartItems/"+localStorage.getItem("email"))
+  }
+
+
+
+  getLikedRestaurant():Observable<any>{
+    return this.http.get("http://localhost:9000/api/v1/getLiked/restaurant/"+localStorage.getItem("email"))
+  }
 }

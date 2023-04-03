@@ -8,7 +8,7 @@
 
   <mat-form-field>
     <textarea matInput formControlName="description" placeholder="Description"></textarea>
-    <mat-error *ngIf="cuisineForm.controls['rating'].invalid">Description is required</mat-error>
+    <mat-error *ngIf="cuisineForm.controls['description'].invalid">Description is required</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -24,14 +24,22 @@
     <mat-error *ngIf="cuisineForm.controls['tag'].invalid">Tag is required</mat-error>
   </mat-form-field> -->
 
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
     <mat-label>Type</mat-label>
     <mat-select formControlName="type" placeholder="type">
-      <mat-option value="pure-veg">pure-veg</mat-option>
-      <mat-option value="Non-veg">Non-veg</mat-option>
+      <mat-option value="Veg">Veg</mat-option>
+      <mat-option value="Non-Veg">Non-Veg</mat-option>
 
     </mat-select>
+  </mat-form-field> -->
+  <mat-form-field appearance="fill">
+    <mat-label>city</mat-label>
+    <mat-select formControlName="type" placeholder="type">
+       <mat-option value="Veg">Veg</mat-option>
+      <mat-option value="Non-Veg">Non-Veg</mat-option>
+    </mat-select>
   </mat-form-field>
+
 
     <input type="file" (change)="onFileSelected($event)" formControlName="image">
     <!-- <mat-error *ngIf="form.controls['image'].invalid">Image is required</mat-error> -->

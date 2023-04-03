@@ -55,7 +55,7 @@
 
         <div style="margin: 20%; margin-top: 5%; margin-bottom: 10%;"  class="row d-flex justify-content-center align-items-center ">
           <div style="position: relative;">
-              <img style="border-radius: 50%;" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+              <img style="border-radius: 50%;" src="http://localhost:9000/image/getimage/{{restaurant.image}}"
                   alt="Generic placeholder image" class="img-fluid img-thumbnail ">
               <button type="button" class="btn btn-outline-dark" (click)="fileInput.click()" data-mdb-ripple-color="dark"
                   style="       border: none;
@@ -69,7 +69,7 @@
           </div>
       </div>
 
-  <input type="file"  formControlName="image" #fileInput hidden>
+  <input type="file"  formControlName="image" #fileInput hidden  (change)="updateImage($event)">
 
 <form [formGroup]="form" (ngSubmit)="submitForm()">
 

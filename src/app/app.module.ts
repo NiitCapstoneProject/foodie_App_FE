@@ -44,6 +44,11 @@ import { VendorRestaurantDashboardComponent } from './vendor-restaurant-dashboar
 import { VendorRestaurantCardComponent } from './vendor-restaurant-card/vendor-restaurant-card.component';
 import {MatSelectModule} from '@angular/material/select';
 import { EditAddressFormComponent } from './edit-address-form/edit-address-form.component';
+import { VendorCusisineCardComponent } from './vendor-cusisine-card/vendor-cusisine-card.component';
+import { VendorCusisineDashboardComponent } from './vendor-cusisine-dashboard/vendor-cusisine-dashboard.component';
+import { FavouriteDashboardComponent } from './favourite-dashboard/favourite-dashboard.component';
+import { FavouriteCardComponent } from './favourite-card/favourite-card.component';
+
 
 
 @NgModule({
@@ -72,7 +77,11 @@ import { EditAddressFormComponent } from './edit-address-form/edit-address-form.
     AddressEditComponent,
     VendorRestaurantDashboardComponent,
     VendorRestaurantCardComponent,
-    EditAddressFormComponent
+    EditAddressFormComponent,
+    VendorCusisineCardComponent,
+    VendorCusisineDashboardComponent,
+    FavouriteDashboardComponent,
+    FavouriteCardComponent
   ],
   imports: [
     BrowserModule,

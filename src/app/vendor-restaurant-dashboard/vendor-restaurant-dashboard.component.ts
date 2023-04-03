@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { Component } from '@angular/core';
 import { RestaurantService } from '../services/restaurant.service';
@@ -9,7 +10,7 @@ import { RestaurantService } from '../services/restaurant.service';
 })
 export class VendorRestaurantDashboardComponent {
 
-  constructor(private userSerice:UserService){}
+  constructor(private userSerice:UserService,private router:Router){}
   restaurants:any[] = []
   ngOnInit(): void {
     this.userSerice.getVendorRestaurant().subscribe(
@@ -18,5 +19,7 @@ export class VendorRestaurantDashboardComponent {
       }
     )
   }
-
+  add(){
+    this.router.navigateByUrl("/addRestaurant")
+  }
 }

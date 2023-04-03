@@ -12,7 +12,7 @@ import { Cuisine } from '../models/cuisine';
 export class CuisineDashboardComponent {
   cuisines: Cuisine[] = []
   id:any
-  onOpen:boolean= false;
+  onOpen:boolean= true;
   value:boolean=false;
   constructor(private route:Router,private restuarant :RestaurantService,private activate:ActivatedRoute){}
   ngOnInit(): void {
