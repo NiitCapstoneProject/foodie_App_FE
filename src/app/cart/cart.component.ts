@@ -24,7 +24,11 @@ export class CartComponent {
       for(let cuisine of data){
         let price=cuisine.price
         let quantity=cuisine.quantity
-        this.total+=price*quantity;
+       this.userService.getCartTotal().subscribe(
+          res =>{
+            this.total =  res
+          }
+        )
         console.log(this.total)
       }
     })
@@ -45,11 +49,21 @@ this.userService.getCartItems().subscribe(
 })
 }
 setQuantity(cuisine:Cuisine){
+  if(cuisine.quantity > 0){
   console.log(cuisine)
   console.log(cuisine.quantity)
   this.userService.setQuantity(cuisine,cuisine.quantity).subscribe(
+    res=> {this.ngOnInit()}
+  )}
+  else{
+    if(window.confirm("If quantity is 0 item will be removed from list")){
+    this.delete(cuisine)}
+    else{
+      cuisine.quantity = 1
+      this.setQuantity(cuisine)
+    }
 
-  )
+  }
 }
 
 
@@ -67,6 +81,7 @@ incrementQuantity(cuisine:Cuisine) {
 
   order(){
 
+    if(window.confirm("After You Order Your Order Will Be Placed")){
     this.order1.cuisines=this.cuisines;
     this.userService.placeOrder(this.order1).subscribe(data=>{
       // alert("Your bill amount: "+data.totalBillAmount)
@@ -81,6 +96,13 @@ incrementQuantity(cuisine:Cuisine) {
         }
       )
     })
+  }}
+  goBack(){
+    console.log(localStorage.getItem("currCity"))
+    if(localStorage.getItem("currCity") == "" || localStorage.getItem("currCity") == null){
+      this.router.navigateByUrl('/dashboard')}
+      else{
+        this.router.navigateByUrl("/"+ localStorage.getItem("currCity")+"/restaurantDashboard")
+      }
   }
-
 }

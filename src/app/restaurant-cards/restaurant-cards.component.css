@@ -120,6 +120,7 @@ ul{
   flex-direction: column;
   overflow: hidden;
   color: #e72929;
+  background-color: white;
 }
 
 img {
@@ -200,4 +201,5 @@ li a:hover{
   .restaurant-item {
     width: 100%;
   }
+  
 }

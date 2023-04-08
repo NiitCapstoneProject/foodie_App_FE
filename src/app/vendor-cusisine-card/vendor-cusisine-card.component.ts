@@ -2,7 +2,8 @@ import { Route, Router } from '@angular/router';
 import { Cuisine } from './../models/cuisine';
 import { Restaurant } from './../models/restaurant';
 import { RestaurantService } from './../services/restaurant.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { outputAst } from '@angular/compiler';
 
 @Component({
   selector: 'app-vendor-cusisine-card',
@@ -20,9 +21,15 @@ export class VendorCusisineCardComponent implements OnInit{
   quantity: 0
 }
 
+@Output() deleted :EventEmitter<Boolean> = new EventEmitter<Boolean>()
 
   delCuisine(id:any){
-    this.serviceRest.deleteCuisineByVendor(this.restaurantId, id).subscribe
+    console.log(id)
+    this.serviceRest.deleteCuisineByVendor(this.restaurantId, id).subscribe(
+      res => {
+        this.deleted.emit(true)
+      }
+    )
 
   }
 

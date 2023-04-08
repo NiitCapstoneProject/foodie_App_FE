@@ -29,20 +29,23 @@ export class AddCuisineComponent {
     this.activate.paramMap.subscribe(
       data => {
       let id = data.get('id') ?? 0;
+      console.log(id)
+      console.log(this.cuisineForm.value)
+      let cuisine:Cuisine={
+        price: 0,
+        quantity: 0
+      };
+      cuisine.name=this.cuisineForm.value.name;
+      cuisine.description=this.cuisineForm.value.rating;
+      cuisine.price=this.cuisineForm.value.price;
+      cuisine.type=this.cuisineForm.value.type;
     this.userService.addCuisine(this.convert(cuisine),id)
         this.router.navigateByUrl("/vendorRestaurantDashboard")
 
       }
     )
     console.log(this.cuisineForm.value);
-    let cuisine:Cuisine={
-      price: 0,
-      quantity: 0
-    };
-    cuisine.name=this.cuisineForm.value.name;
-    cuisine.description=this.cuisineForm.value.rating;
-    cuisine.price=this.cuisineForm.value.price;
-    cuisine.type=this.cuisineForm.value.type;
+
     // cuisine.tags=this.cuisineForm.value.tag;
     // this.userService.addCuisine(this.convert(cuisine))
   }

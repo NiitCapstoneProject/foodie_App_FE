@@ -42,6 +42,8 @@ export class RegistrationComponent {
     user.email = this.registerForm.value.email
     user.password = this.registerForm.value.password
     user.name = this.registerForm.value.name
+    this.registerForm.value.dob = new Date(this.registerForm.value.dob.getTime() - this.registerForm.value.dob.getTimezoneOffset() * 60000);
+    this.registerForm.value.dob = this.registerForm.value.dob.toISOString().substring(0, 10);
     user.dob = this.registerForm.value.dob
     user.phoneNo = this.registerForm.value.phoneNo
     this.userService.register(this.convert(user))

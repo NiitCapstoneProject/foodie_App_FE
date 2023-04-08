@@ -10,7 +10,7 @@
         <div style="margin: 20%; margin-top: 5%; margin-bottom: 10%;"  class="row d-flex justify-content-center align-items-center ">
           <div style="position: relative;">
             <!-- {{cuisine.image}} -->
-              <img style="border-radius: 50%;" src="http://localhost:9000/image/getimage/{{cuisine.image}}"
+              <img id="profile-img" style="border-radius: 50%;" src="http://localhost:9000/image/getimage/{{cuisine.image}}"
 
                   alt="Generic placeholder image" class="img-fluid img-thumbnail ">
               <button type="button" class="btn btn-outline-dark" (click)="fileInput.click()" data-mdb-ripple-color="dark"
@@ -54,7 +54,7 @@
 
   <mat-form-field appearance="fill">
     <mat-label>Type</mat-label>
-    <mat-select formControlName="type" placeholder="type">
+    <mat-select formControlName="type" placeholder="{{cuisine.type}}">
       <mat-option value="Veg">Veg</mat-option>
       <mat-option value="Non-Veg">Non-veg</mat-option>
 

@@ -4,6 +4,7 @@ import { Component, Input, Output } from '@angular/core';
 import { Cuisine } from '../models/cuisine';
 import { RestaurantService } from '../services/restaurant.service';
 import { CartService } from '../services/cart.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cuisine-cards',
@@ -17,6 +18,14 @@ export class CuisineCardsComponent {
       price: 0,
       quantity: 0
     }
+    addedToCart:boolean= false
+    ngOnInit(){
+      this.userService.getAddedToCart(this.cuisine.id).subscribe(
+        res =>{
+          this.addedToCart = res
+        }
+      )
+    }
 
     addCart(){
       console.log(this.cuisine)
@@ -27,6 +36,11 @@ export class CuisineCardsComponent {
         next:data =>{
           this.cart.cartLength = Number(data)
           console.log(Number(data) + "working")
+          this.userService.getAddedToCart(this.cuisine.id).subscribe(
+            res =>{
+              this.addedToCart = res
+            }
+          )
         }
       }
         // res => {

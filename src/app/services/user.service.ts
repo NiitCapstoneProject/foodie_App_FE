@@ -16,6 +16,13 @@ import { Cuisine } from '../models/cuisine';
 export class UserService {
   loginID:any
   totalAmount:any
+  get header() {
+    return new HttpHeaders (
+      {
+        "authorization" : "Bearer " +String(localStorage.getItem("token"))
+      }
+    );
+  }
 
   constructor(private http: HttpClient,private login:LoginService,private router:Router) { }
   register(user:FormData){
@@ -33,7 +40,7 @@ export class UserService {
   }
   vendor(user:User){
     console.log("is working")
-    this.http.post("http://localhost:9000/api/v1/vendor",user).subscribe({
+    this.http.post("http://localhost:9000/api/v1/user/vendor",user,{headers:this.header}).subscribe({
       next:(data:any)=>{
         if(data!="")
         {
@@ -45,15 +52,14 @@ export class UserService {
   })
   }
   addRestaurant(restaurant:FormData){
-    const headers = new HttpHeaders (
-      {
-        "authorization" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJDdXN0b21lciBVc2VySWQiOiJleGFtcGxlMUBleGFtcGxlLmNvbSIsImlhdCI6MTY3OTMwMzI5NX0.uYAoNJXtDrr0bMpt6iduMm6tOj8GtA1O9Fhk6wEnkFK5mN41UrYFkUaSdeZXZ-xAuIwcEE_DRNbpWnweCTCnXA"
-        // +this.login.token
-      }
-    );
+    // const headers = new HttpHeaders (
+    //   {
+    //     "authorization" : "Bearer " +String(localStorage.getItem("token"))
+    //   }
+    // );
     this.http.post("http://localhost:9000/api/v1/user/restaurant/"+localStorage.getItem('email'),restaurant
     // this.login.user.email
-    ,{headers:headers}
+    ,{headers:this.header}
     ).subscribe(
       async res=>{console.log("added");
       let restaurant:Restaurant = res
@@ -61,64 +67,66 @@ export class UserService {
     }
     )
   }
+  // -------------
   addCuisine(cuisine:FormData,restaurantId:any){
+    cuisine.forEach(data=>{console.log(data)})
     this.http.post("http://localhost:9000/restaurant/cuisine/"+localStorage.getItem('email')+"/"+restaurantId,cuisine).subscribe(
-      res=>{console.log("cuisine method")}
+      res=>{console.log(res+"cuisine method")}
     )
   }
-
+// ---------------
   getRestaurant():Observable<any>{
     return this.http.get("http://localhost:9000/restaurant/getAll")
   }
 
   placeOrder(order:Order):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/"+localStorage.getItem('email')+"/order",order)
+    return this.http.post("http://localhost:9000/api/v1/user/"+localStorage.getItem('email')+"/order",order ,{headers:this.header})
   }
   getOrders():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/allOrders/"+localStorage.getItem('email'))
+    return this.http.get("http://localhost:9000/api/v1/user/allOrders/"+localStorage.getItem('email') ,{headers:this.header})
   }
   deleteCuisine(cuisine:Cuisine):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/delete/"+localStorage.getItem('email'),cuisine)
+    return this.http.post("http://localhost:9000/api/v1/user/delete/"+localStorage.getItem('email'),cuisine ,{headers:this.header})
   }
 
   setQuantity(cusine:Cuisine,quantity:number):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/setQuantity/"+localStorage.getItem('email')+"/"+quantity,cusine)
+    return this.http.post("http://localhost:9000/api/v1/user/setQuantity/"+localStorage.getItem('email')+"/"+quantity,cusine ,{headers:this.header})
   }
 
   removeFav(restaurantId:any):Observable<any>{
-   return this.http.delete("http://localhost:9000/api/v1/removeFavorite/"+localStorage.getItem('email')+"/"+restaurantId)
+   return this.http.delete("http://localhost:9000/api/v1/user/removeFavorite/"+localStorage.getItem('email')+"/"+restaurantId ,{headers:this.header})
   }
   addFav(restaurantId:any):Observable<any>{
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-   return this.http.post("http://localhost:9000/api/v1/favorite/"+localStorage.getItem('email'),JSON.stringify(restaurantId),{ headers: headers })
+   return this.http.post("http://localhost:9000/api/v1/user/favorite/"+localStorage.getItem('email'),JSON.stringify(restaurantId),{ headers: headers })
   //  +this.login.user.email,restaurantId)
   }
 
 
   getAddress():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/getAddress/"+localStorage.getItem('email'))
+    return this.http.get("http://localhost:9000/api/v1/user/getAddress/"+localStorage.getItem('email') ,{headers:this.header})
   }
 
   addAddress(address:Address):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/address/"+localStorage.getItem('email'),address)
+    return this.http.post("http://localhost:9000/api/v1/user/address/"+localStorage.getItem('email'),address ,{headers:this.header})
   }
 
   deleteAddress(id:string):Observable<any>{
-    return this.http.delete("http://localhost:9000/api/v1/delete/address/"+localStorage.getItem('email')+"/"+id)
+    return this.http.delete("http://localhost:9000/api/v1/user/delete/address/"+localStorage.getItem('email')+"/"+id ,{headers:this.header})
   }
 
   updateAddress(address:Address):Observable<any>{
-   return this.http.put("http://localhost:9000/api/v1/editAddress/"+localStorage.getItem('email'),address)
+   return this.http.put("http://localhost:9000/api/v1/user/editAddress/"+localStorage.getItem('email'),address ,{headers:this.header})
   }
 
   getVendorRestaurant():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/get/vendor/restaurant/"+localStorage.getItem('email'))
+    return this.http.get("http://localhost:9000/api/v1/user/get/vendor/restaurant/"+localStorage.getItem('email') ,{headers:this.header})
   }
   deleteRestaurantByVendor(restaurantId:any):Observable<any>{
-    return this.http.delete("http://localhost:9000/api/v1/deleteRestaurant/"+localStorage.getItem('email')+"/"+restaurantId)
+    return this.http.delete("http://localhost:9000/api/v1/user/deleteRestaurant/"+localStorage.getItem('email')+"/"+restaurantId ,{headers:this.header})
   }
   updateRestaurantByVendor(restaurant:Restaurant):Observable<any>{
-    return this.http.put("http://localhost:9000/api/v1/updateRestaurant",restaurant)
+    return this.http.put("http://localhost:9000/api/v1/user/updateRestaurant",restaurant ,{headers:this.header})
   }
   getUser():Observable<any>{
     const headers = new HttpHeaders (
@@ -145,12 +153,21 @@ export class UserService {
   }
 
   getCartItems(){
-    return this.http.get("http://localhost:9000/api/v1/cartItems/"+localStorage.getItem("email"))
+    return this.http.get("http://localhost:9000/api/v1/user/cartItems/"+localStorage.getItem("email") ,{headers:this.header})
   }
 
 
 
   getLikedRestaurant():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/getLiked/restaurant/"+localStorage.getItem("email"))
+    return this.http.get("http://localhost:9000/api/v1/user/getLiked/restaurant/"+localStorage.getItem("email") ,{headers:this.header})
+  }
+
+  getAddedToCart(cuisineId:any):Observable<any>{
+    return this.http.get("http://localhost:9000/api/v1/user/addedTo/cart/"+localStorage.getItem("email")+"/"+cuisineId ,{headers:this.header})
+  }
+
+
+  getCartTotal():Observable<any>{
+    return this.http.get("http://localhost:9000/api/v1/user/get/cartTotal/"+localStorage.getItem("email") ,{headers:this.header})
   }
 }

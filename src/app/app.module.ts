@@ -48,6 +48,7 @@ import { VendorCusisineCardComponent } from './vendor-cusisine-card/vendor-cusis
 import { VendorCusisineDashboardComponent } from './vendor-cusisine-dashboard/vendor-cusisine-dashboard.component';
 import { FavouriteDashboardComponent } from './favourite-dashboard/favourite-dashboard.component';
 import { FavouriteCardComponent } from './favourite-card/favourite-card.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -90,7 +91,7 @@ import { FavouriteCardComponent } from './favourite-card/favourite-card.componen
     MatToolbarModule,
     MatIconModule,
     MatCardModule,MatFormFieldModule,MatDatepickerModule,MatNativeDateModule,MatInputModule, HttpClientModule,
-    ReactiveFormsModule,MatSidenavModule,MatListModule,MatMenuModule,MatCheckboxModule, NgxStarRatingModule,FormsModule,MatSelectModule
+    ReactiveFormsModule,MatSidenavModule,MatListModule,MatMenuModule,MatCheckboxModule, NgxStarRatingModule,FormsModule,MatSelectModule,MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

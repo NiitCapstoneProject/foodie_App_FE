@@ -1,7 +1,7 @@
 import { LoginService } from './login.service';
 import { Restaurant } from './../models/restaurant';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cuisine } from '../models/cuisine';
 import { Feedback } from '../models/feedback';
@@ -13,19 +13,30 @@ export class RestaurantService {
   constructor(private http:HttpClient,private login:LoginService) { }
   restaurant:any
   clicked:boolean=false
+  get header() {
+    return new HttpHeaders (
+      {
+        "authorization" : "Bearer " +String(localStorage.getItem("token"))
+      }
+    );
+  }
   getCuisine(id:any):Observable<any>{
    return this.http.get("http://localhost:9000/restaurant/cuisine/"+id)
   }
 
 
+
   searchResAndCusName(name:any){
     this.http.get("http://localhost:9000/restaurant/find/"+name)
   }
+
+  // ============
   addToCart(cuisine:Cuisine):Observable<any>{
-    return this.http.post("http://localhost:9000/api/v1/cart/"+localStorage.getItem("email"),cuisine)
+    return this.http.post("http://localhost:9000/api/v1/user/cart/"+localStorage.getItem("email"),cuisine,{headers:this.header})
    }
+  //  =========
    getCartData():Observable<any>{
-    return this.http.get("http://localhost:9000/api/v1/cartList/"+localStorage.getItem("email"))
+    return this.http.get("http://localhost:9000/api/v1/user/cartList/"+localStorage.getItem("email"),{headers:this.header})
    }
    getResturantById(id:any):Observable<any>{
     console.log("I am working "+id )
@@ -38,8 +49,9 @@ export class RestaurantService {
     return this.http.get("http://localhost:9000/restaurant/feedbacks/"+restaurantId)
   }
 
+  // ================
   getIfLiked(restaurantId:any){
-    return this.http.get("http://localhost:9000/api/v1/getFavorites/"+localStorage.getItem('email')+"/"+restaurantId)
+    return this.http.get("http://localhost:9000/api/v1/user/getFavorites/"+localStorage.getItem('email')+"/"+restaurantId,{headers:this.header})
     // +id+"/"+restaurantId)
   }
 
@@ -53,7 +65,7 @@ export class RestaurantService {
   deleteCuisineByVendor(restaurantId:any,cuisineId:any):Observable<any>{
     return this.http.delete("http://localhost:9000/restaurant/deleteCuisine/"+restaurantId+"/"+cuisineId)
   }
-  updateCuisineByVendor(restaurantId:any,cusisine:Cuisine):Observable<any>{
+  updateCuisineByVendor(restaurantId:number,cusisine:Cuisine):Observable<any>{
     return this.http.put("http://localhost:9000/restaurant/updateCuisine/"+restaurantId,cusisine)
   }
   findRestaurantBycityAndName(name:string,city:string):Observable<any>{

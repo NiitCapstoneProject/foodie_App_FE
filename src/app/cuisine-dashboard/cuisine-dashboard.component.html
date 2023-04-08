@@ -1,10 +1,10 @@
 <div>
-  <app-info-resturant  (sending)="onChange($event)" [restaurantId] = "id"></app-info-resturant>
+  <app-info-resturant  (sending)="onChange($event)" (feed)="feed($event)" [restaurantId] = "id"></app-info-resturant>
 </div>
 <hr class="my-4" />
 
 <div *ngIf="!onOpen">
-  <app-feedback [restaurantId] = "id"></app-feedback>
+  <app-feedback [restaurantId] = "id" [feed]="feed1" (feed1) = "feed2($event)"></app-feedback>
 </div>
 <!--
 <div>

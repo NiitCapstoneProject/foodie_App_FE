@@ -29,4 +29,7 @@ export class VendorCusisineDashboardComponent implements OnInit {
   add(){
     this.router.navigateByUrl(this.id+"/addCuisine")
   }
+  deleted(){
+    this.ngOnInit()
+  }
 }

@@ -1,6 +1,6 @@
 import { Feedback } from './../models/feedback';
 import { RestaurantService } from './../services/restaurant.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-feedback',
@@ -16,6 +16,13 @@ export class FeedbackComponent implements OnInit {
     },err=>{"error"})
   }
   @Input() restaurantId:any
-
-
+  @Input() feed:boolean = false
+  @Output() feed1:EventEmitter<boolean> = new EventEmitter<boolean>()
+  ngOnChanges(changes: SimpleChanges){
+      if(this.feed)
+      {
+        this.ngOnInit()
+        this.feed1.emit(false)
+      }
+  }
 }

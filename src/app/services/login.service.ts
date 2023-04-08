@@ -51,9 +51,7 @@ export class LoginService {
                 if(localStorage.getItem("isLoggedIn"))
                  if(data != ''){
                      this.user = data
-                    //  this.route.navigateByUrl('/song')
                     localStorage.setItem("vendor",String(this.user.vendor))
-
                     localStorage.setItem("email",String(this.user.email))
                     localStorage.setItem("name",String(this.user.name))
                     localStorage.setItem("image",String(this.user.image))

@@ -41,13 +41,14 @@ search(){
   console.log(this.currentCity + "search")
   console.log(this.binding + "search")
 if(this.binding==""){
+  localStorage.setItem("currCity",this.currentCity)
 this.restaurant.findRestaurantBycity(this.currentCity).subscribe(res=>{console.log(res)
 this.restaurants=res;
 this.router.navigateByUrl("/"+this.currentCity+"/restaurantDashboard")
 })
 }
 else {
-  console.log("hello mf's");
+  localStorage.setItem("currCity",this.currentCity)
   this.restaurant.findRestaurantBycityAndName(this.binding, this.currentCity).subscribe(res => {
     console.log(res);
     this.restaurants = res;

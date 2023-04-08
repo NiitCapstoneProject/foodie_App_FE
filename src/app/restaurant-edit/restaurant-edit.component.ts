@@ -17,11 +17,17 @@ export class RestaurantEditComponent {
     name: ['', Validators.required],
     description: ['', Validators.required],
     city: ['', Validators.required],
-    image: ['', ],
+    // image: ['', ],
   });
   submitForm(){
     console.log(this.form.value)
-    this.userservice.updateRestaurantByVendor(this.form.value).subscribe(res=>{console.log("formUpdated");
+    let restaurant:Restaurant = {
+      id:this.restaurant.id,
+      name:this.form.value.name,
+      description:this.form.value.description,
+      city:this.form.value.city
+    }
+    this.userservice.updateRestaurantByVendor(restaurant).subscribe(res=>{console.log("formUpdated");
     })
   }
   onFileSelected(event:any){
@@ -46,8 +52,10 @@ export class RestaurantEditComponent {
     )
   }
   updateImage(event:any){
-    this.userservice.updateImage( this.form.value.image,event.target.files[0]).subscribe(res=>{console.log("succesImage");
-    // this.user.image = this.user.image
+    this.resService.updateImage( this.restaurant.image,event.target.files[0]).subscribe(res=>{console.log("succesImage");
+    let img:any = document.getElementById("profile-img")
+    img.src = window.URL.createObjectURL(event.target.files[0])
+    console.log(img.src)
     })
   }
 }

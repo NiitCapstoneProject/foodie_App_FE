@@ -31,4 +31,13 @@ export class CuisineDashboardComponent {
     console.log(event)
     this.onOpen = event
   }
+  feed1:boolean = false
+  feed(event:boolean) {
+    this.feed1 = true
+    // this.feed1 = false
+  }
+  feed2(event:boolean){
+    this.feed1 = false
+  }
+
 }

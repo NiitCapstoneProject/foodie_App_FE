@@ -1,5 +1,5 @@
 <div *ngFor="let cuisine of cuisines">
-  <app-vendor-cusisine-card [cuisine] = "cuisine" [restaurantId]="id"></app-vendor-cusisine-card>
+  <app-vendor-cusisine-card [cuisine] = "cuisine" [restaurantId]="id" (deleted)="deleted()"></app-vendor-cusisine-card>
 </div>
 
 

@@ -33,7 +33,11 @@ export class LoginComponent {
     // console.log(user)
     this.login.login(user)
     console.log(this.login.user)
-    this.route.navigateByUrl('/dashboard')
+    if(localStorage.getItem("currCity") == "" || localStorage.getItem("currCity") == null){
+    this.route.navigateByUrl('/dashboard')}
+    else{
+      this.route.navigateByUrl("/"+ localStorage.getItem("currCity")+"/restaurantDashboard")
+    }
   }
   get email(){
     return this.loginForm.get('email')

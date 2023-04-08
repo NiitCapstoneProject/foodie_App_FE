@@ -47,7 +47,9 @@ export class InfoResturantComponent implements OnInit {
         );
 
   }
+  @Output() feed:EventEmitter<boolean> = new EventEmitter<boolean>
   feedback(data:any){
+    if(data != ""){
     console.log(data+"datahere");
     let feedback1:Feedback ={}
     feedback1.user= String(localStorage.getItem("email"))
@@ -55,8 +57,9 @@ export class InfoResturantComponent implements OnInit {
     feedback1.image = Number(localStorage.getItem("image"))
     this.restaurantService.addFeedback(feedback1,this.restaurantId).subscribe( {next:(res:any)=>{console.log("sucess")
     this.text = ""
+    this.feed.emit(true)
   }})
-  }
+  }}
   change (){
     console.log(this.rating3)
     this.restaurantService.addRating(this.restaurantId,this.rating3).subscribe(
