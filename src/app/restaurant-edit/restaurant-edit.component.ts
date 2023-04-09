@@ -1,6 +1,6 @@
 import { Restaurant } from './../models/restaurant';
 import { RestaurantService } from './../services/restaurant.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { CityService } from './../services/city.service';
 import { Component } from '@angular/core';
@@ -12,13 +12,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./restaurant-edit.component.css']
 })
 export class RestaurantEditComponent {
-  constructor(private fb:FormBuilder,private city1:CityService,private resService:RestaurantService, private userservice:UserService,private activate:ActivatedRoute){}
-  form:FormGroup|any = this.fb.group({
-    name: ['', Validators.required],
-    description: ['', Validators.required],
-    city: ['', Validators.required],
-    // image: ['', ],
-  });
+  constructor(private fb:FormBuilder,private city1:CityService,private resService:RestaurantService, private userservice:UserService,private activate:ActivatedRoute,private route:Router){}
+  form:FormGroup|any
   submitForm(){
     console.log(this.form.value)
     let restaurant:Restaurant = {
@@ -28,6 +23,7 @@ export class RestaurantEditComponent {
       city:this.form.value.city
     }
     this.userservice.updateRestaurantByVendor(restaurant).subscribe(res=>{console.log("formUpdated");
+    this.route.navigateByUrl("/vendorRestaurantDashboard")
     })
   }
   onFileSelected(event:any){
@@ -42,6 +38,12 @@ export class RestaurantEditComponent {
        let id = data.get('id') ?? 0;
         this.resService.getResturantById(id).subscribe((res:Restaurant)=>{
           this.restaurant=res
+          this.form = this.fb.group({
+            name: [this.restaurant.name, Validators.required],
+            description: [this.restaurant.description, Validators.required],
+            city: ['', ],
+            // image: ['', ],
+          });
         })
       }
     )

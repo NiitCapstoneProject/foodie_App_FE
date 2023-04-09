@@ -21,11 +21,12 @@
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="../../assets/images/mini-removebg-preview.png" height="60px" width="60px" alt="MDB Logo">
-        <p style="color: black; "><b><I>FoOdIe App</I></b></p>
+        <p style="color: black;  "><b><I>FoOdIe App</I></b></p>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"> <i class="fas fa-bars"></i></span>
       </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- <li class="nav-item">
             <a class="nav-link" href="#">Login</a>
@@ -62,10 +63,16 @@
 
 
        <mat-icon class="navbar-nav ms-auto mb-2 mb-lg-0" *ngIf="!loggedIn" (click) = "goToLogin()">login</mat-icon>
+
         <ul  *ngIf="loggedIn" class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/cart"><i class="fas fa-shopping-cart"></i><span class="badge rounded-pill bg-light text-dark ms-1">{{cartLength}}</span></a>
-          </li>
+          <div>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/cart"><i class="fas fa-shopping-cart"></i><span class="badge rounded-pill bg-light text-dark ms-1">{{cartLength}}</span></a>
+            </li>
+          </div>
+        <div>
+
+        </div>
           <li class="nav-item">
             <a class="nav-link" routerLink="/favorite">  <i class="fas fa-heart fa-lg"></i><span class="badge rounded-pill bg-light text-dark ms-1"></span></a>
           </li>
@@ -82,7 +89,10 @@
             </ul>
           </li>
         </ul>
-
+      </div>
+      </div>
+      </nav>
+      </div>
 
 
 

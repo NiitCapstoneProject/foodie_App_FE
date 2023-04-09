@@ -10,7 +10,8 @@
             <div class="col-12 col-md-6">
               <div class="card-body">
                 <h2 class="card-title">{{cuisine.name}}</h2>
-                <p class="card-text"><small class="text-muted">{{cuisine.type}}</small></p>
+                <p class="card-text" *ngIf="cuisine.type === 'Veg' "><small class="text-muted"> <img src="../../assets/images/Veg.png"  width="15px"> {{cuisine.type}}</small></p>
+                <p class="card-text" *ngIf="cuisine.type != 'Veg'" ><small class="text-muted"> <img src="../../assets/images/Non-Veg.png" width="15px"> {{cuisine.type}}</small></p>
                 <div class="d-flex align-items-center">
                   <span class="me-2 rating">{{cuisine.description}}</span>
                   <div class="rating-stars">

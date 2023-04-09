@@ -89,7 +89,7 @@
 </mat-form-field> -->
 
 <mat-form-field>
-<mat-select formControlName="city" placeholder="City">
+<mat-select formControlName="city" placeholder="{{restaurant.city}}">
   <mat-option  *ngFor="let city of cities" value="{{city}}">{{city}}</mat-option>
 </mat-select>
 </mat-form-field>
