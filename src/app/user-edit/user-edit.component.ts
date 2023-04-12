@@ -3,6 +3,7 @@ import { User } from './../models/user';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-edit',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class UserEditComponent {
   registerForm: FormGroup|any;
 user:User = {}
-  constructor(private fb:FormBuilder,private userService:UserService,private route:Router){}
+  constructor(private fb:FormBuilder,private userService:UserService,private route:Router,private _snackbar:MatSnackBar){}
   ngOnInit() {
     let user:User ={}
     const email:any = localStorage.getItem('email')
@@ -64,11 +65,13 @@ user:User = {}
     this.registerForm.value.dob = this.registerForm.value.dob.toISOString().substring(0, 10);
     console.log(this.registerForm.value.dob)
     this.userService.updateUser(this.registerForm.value).subscribe(res=>{console.log("userUpdated");
+
     if(localStorage.getItem("currCity")!=""){
     this.route.navigateByUrl("/"+localStorage.getItem("currCity")+"/restaurantDashboard")}
     else{
       this.route.navigateByUrl("/dashboard")
     }
+    this._snackbar.open("Successfully updated", "Ok",{duration:2000});
     })
   }
 
@@ -91,6 +94,8 @@ user:User = {}
     // console.log(img.src)
     img.src = window.URL.createObjectURL(event.target.files[0])
     console.log(img.src)
+    this._snackbar.open("your Image is updated", "Ok",{duration:2000});
+
     })
   }
 }

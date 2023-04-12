@@ -1,3 +1,4 @@
+import { PaymentComponent } from './payment/payment.component';
 import { VendorGuard } from './services/vendor.guard';
 import { FavouriteDashboardComponent } from './favourite-dashboard/favourite-dashboard.component';
 import { FavouriteCardComponent } from './favourite-card/favourite-card.component';
@@ -140,7 +141,7 @@ const routes: Routes = [
 
 },
 {
-  path: "editAddressForm",
+  path: "editAddressForm/:id",
   component: EditAddressFormComponent,
   canActivate:[AuthGuard]
 
@@ -179,6 +180,11 @@ const routes: Routes = [
   path: "favorite",
   component: FavouriteDashboardComponent ,
   canActivate:[AuthGuard]
+
+},
+{
+  path: ":id/payment",
+  component: PaymentComponent,
 
 },
 {

@@ -21,17 +21,57 @@ export class RegistrationComponent {
   image1:any;
   ngOnInit() {
     this.registerForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email,Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
       password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$')]],
       confirmPassword: ['', [Validators.required]],
       phoneNo: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       name: ['', [Validators.required]],
       dob: ['', [Validators.required]],
       image:[null,[Validators.required]],
-    }, {
-      validator: this.passwordMatchValidator
-    });
+    }, { validator: this.passwordShouldMatchValidation});
   }
+// passwordMatchValidator: ValidatorFn = (control: AbstractControl): {[key: string]: any} | null => {
+//     const password = control.get('password');
+//     const confirmPassword = control.get('confirmPassword');
+//     return password && confirmPassword && password.value !== confirmPassword.value ? { passwordMismatch: true } : null;
+//   }
+get confirmPassword(){
+  return this.registerForm.get("confirmPassword")
+}
+
+  passwordShouldMatchValidation(myControl:AbstractControl){
+    const passwordValue=myControl.get('password')?.value;
+    const confirmPasswordValue=myControl.get('confirmPassword')?.value;
+    if(!passwordValue || !confirmPasswordValue){
+      return null;
+   }
+  if(passwordValue != confirmPasswordValue){
+    return {passwordShouldMatch : false};
+ }
+ return null;
+}
+// passwordMatchValidator: ValidatorFn = (control: FormGroup): {[key: string]: any} | null => {
+//   const password = control.get('password');
+//   const confirmPassword = control.get('confirmPassword');
+
+//   if (password.value !== confirmPassword.value) {
+//     return { passwordMismatch: true };
+//   }
+
+//   return null;
+// }
+
+
+// passwordMatchValidator: ValidatorFn |any= (control: FormGroup): {[key: string]: any} | null => {
+//   const password = control.get('password');
+//   const confirmPassword = control.get('confirmPassword');
+
+//   if (password?.value !== confirmPassword?.value) {
+//     return { passwordMismatch: true };
+//   }
+
+//   return null;
+// }
 
   onSubmit() {
 
@@ -47,6 +87,7 @@ export class RegistrationComponent {
     user.dob = this.registerForm.value.dob
     user.phoneNo = this.registerForm.value.phoneNo
     this.userService.register(this.convert(user))
+
 
 
   }
@@ -66,11 +107,8 @@ export class RegistrationComponent {
 
   return formdata;
   }
-  passwordMatchValidator: ValidatorFn = (control: AbstractControl): {[key: string]: any} | null => {
-    const password = control.get('password');
-    const confirmPassword = control.get('confirmPassword');
-    return password && confirmPassword && password.value !== confirmPassword.value ? { passwordMismatch: true } : null;
-  }
+
+
 }
 
 

@@ -80,23 +80,41 @@ incrementQuantity(cuisine:Cuisine) {
 }
 
   order(){
+    let cartLength :number|any = 0
+    this.userService.getCartItems().subscribe(
+      res=>{
+        // this.cartLength = res
+       cartLength = Number(res)
+       if(cartLength > 0){
+        // if(window.confirm("After You Order Your Order Will Be Placed")){
+        this.order1.cuisines=this.cuisines;
+        // this.userService.placeOrder(this.order1).subscribe(data=>{
+          // alert("Your bill amount: "+data.totalBillAmount)
+        this.router.navigateByUrl("/addressdash")
 
-    if(window.confirm("After You Order Your Order Will Be Placed")){
-    this.order1.cuisines=this.cuisines;
-    this.userService.placeOrder(this.order1).subscribe(data=>{
-      // alert("Your bill amount: "+data.totalBillAmount)
-    this.router.navigateByUrl("/addressdash")
+          // console.log(data);
+          this.userService.getCartItems().subscribe(
+            res=>{
+              // this.cartLength = res
+              console.log(res)
+              this.cart.cartLength = Number(res)
+            }
+          )
+        // })
+      // }
+    }
+      else{
+        window.alert("Please add items to cart first")
+      }
 
-      console.log(data);
-      this.userService.getCartItems().subscribe(
-        res=>{
-          // this.cartLength = res
-          console.log(res)
-          this.cart.cartLength = Number(res)
-        }
-      )
-    })
-  }}
+
+      }
+    )
+
+
+
+
+}
   goBack(){
     console.log(localStorage.getItem("currCity"))
     if(localStorage.getItem("currCity") == "" || localStorage.getItem("currCity") == null){

@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./cuisine-cards.component.css']
 })
 export class CuisineCardsComponent {
-  constructor(private service:RestaurantService,private userService:UserService,private cart : CartService){}
+  constructor(private service:RestaurantService,private userService:UserService,private cart : CartService,private _snackbar:MatSnackBar){}
 
     @Input() cuisine: Cuisine = {
       price: 0,
@@ -48,6 +48,30 @@ export class CuisineCardsComponent {
         // }
 
       )
-    },err=>{console.log("error")})
+    },err=>{console.log("error")
+    this._snackbar.open("Please Login First","Ok",{duration:2000})
+  })
+        }
+
+
+
+
+
+        delete(result:Cuisine){
+          if(window.confirm("Are you sure you want to remove this item from cart")){
+          console.log(result.id)
+          this.userService.deleteCuisine(result).subscribe(data=>{
+          // this.total=0;
+          this.ngOnInit();
+          console.log(data);
+          this.userService.getCartItems().subscribe(
+            res=>{
+              // this.cartLength = res
+              this.cart.cartLength = Number(res)
+            }
+          )
+          })
+          }
+        else{}
         }
 }

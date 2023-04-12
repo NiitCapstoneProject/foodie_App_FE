@@ -3,6 +3,7 @@ import { UrlTree, Router, ActivatedRoute } from '@angular/router';
 import { Cuisine } from './../models/cuisine';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-cuisine',
@@ -12,18 +13,30 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddCuisineComponent {
   image1:any;
 
-  constructor(private formBuilder: FormBuilder,private userService:UserService,private router:Router,private activate:ActivatedRoute) { }
-
-
+  constructor(private formBuilder: FormBuilder, private _snackbar:MatSnackBar, private userService:UserService,private router:Router,private activate:ActivatedRoute) { }
     cuisineForm: FormGroup | any= this.formBuilder.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
-      price: ['', Validators.required],
+      description: ['', [Validators.required]],
+      price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/) , Validators.min(1)]],
       type: ['', Validators.required],
       // tags: ['',[]],
       image: [null]
     });
+    get name() {
+      return this.cuisineForm.get('name');
+    }
+    get description() {
+      return this.cuisineForm.get('description');
+    }
+    get price() {
+      return this.cuisineForm.get('price');
+    }
+    get type() {
+      return this.cuisineForm.get('type');
+    }
 
+
+   
 
   onSubmit() {
     this.activate.paramMap.subscribe(
@@ -36,11 +49,11 @@ export class AddCuisineComponent {
         quantity: 0
       };
       cuisine.name=this.cuisineForm.value.name;
-      cuisine.description=this.cuisineForm.value.rating;
+      cuisine.description=this.cuisineForm.value.description;
       cuisine.price=this.cuisineForm.value.price;
       cuisine.type=this.cuisineForm.value.type;
     this.userService.addCuisine(this.convert(cuisine),id)
-        this.router.navigateByUrl("/vendorRestaurantDashboard")
+    this._snackbar.open("Cuisine is added", "Ok",{duration:2000});
 
       }
     )

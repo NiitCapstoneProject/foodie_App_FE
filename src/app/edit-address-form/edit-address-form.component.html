@@ -22,8 +22,8 @@
 
 <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
   <mat-form-field>
-    <input matInput formControlName="name" placeholder="Name">
-    <mat-error *ngIf="addressForm.controls['name'].invalid">Name is required</mat-error>
+    <input matInput formControlName="name" placeholder=" " readonly>
+    <!-- <mat-error *ngIf="addressForm.controls['name'].invalid">Name is required</mat-error> -->
   </mat-form-field>
 
   <mat-form-field>

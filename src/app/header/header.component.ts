@@ -17,9 +17,11 @@ export class HeaderComponent implements OnInit {
   constructor(private login:LoginService,private route:Router,private uS:UserService,private cart:CartService){}
   get cartLength():any { return this.cart.cartLength}
   ngOnInit(): void {
+    // this.cart.cartLength =
       this.uS.getCartItems().subscribe(
         res=>{
           // this.cartLength = res
+          console.log(res)
           this.cart.cartLength = Number(res)
         }
       )

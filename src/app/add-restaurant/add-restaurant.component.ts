@@ -4,6 +4,7 @@ import { Restaurant } from './../models/restaurant';
 import { UserService } from './../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -15,7 +16,7 @@ export class AddRestaurantComponent implements OnInit {
   image1:any;
   // form: FormGroup;
   cities:String[]=[];
-  constructor(private fb: FormBuilder,private userService:UserService,private city1:CityService,private router:Router) {
+  constructor(private fb: FormBuilder,private userService:UserService,private city1:CityService,private router:Router,private _snackbar:MatSnackBar) {
 
   }
   ngOnInit(): void {
@@ -63,6 +64,7 @@ export class AddRestaurantComponent implements OnInit {
     restaurant.description = this.form.value.description
     restaurant.id = 209
     this.userService.addRestaurant(this.convert(restaurant));
+    this._snackbar.open("Resturant is added", "Ok",{duration:2000});
     // Submit form data here
 
   }

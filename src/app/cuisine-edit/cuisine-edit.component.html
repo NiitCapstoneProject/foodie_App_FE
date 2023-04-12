@@ -40,8 +40,10 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput formControlName="price" placeholder="price">
-    <mat-error *ngIf="cuisineForm.controls['price'].invalid">Price is required</mat-error>
+    <input matInput formControlName="price" placeholder="price" id="price" >
+    <mat-error *ngIf="cuisineForm.get('price').hasError('required')">Price is required</mat-error>
+    <mat-error *ngIf="cuisineForm.get('price').hasError('pattern')">Should be a number</mat-error>
+    <mat-error *ngIf="cuisineForm.get('price').hasError('min')">Should be greater than 0</mat-error>
   </mat-form-field>
   <!-- <mat-form-field>
     <input matInput >

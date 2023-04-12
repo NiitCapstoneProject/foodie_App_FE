@@ -5,6 +5,7 @@ import { UserService } from './../services/user.service';
 import { CityService } from './../services/city.service';
 import { Component } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-restaurant-edit',
@@ -12,7 +13,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
   styleUrls: ['./restaurant-edit.component.css']
 })
 export class RestaurantEditComponent {
-  constructor(private fb:FormBuilder,private city1:CityService,private resService:RestaurantService, private userservice:UserService,private activate:ActivatedRoute,private route:Router){}
+  constructor(private fb:FormBuilder,private city1:CityService,private resService:RestaurantService, private _snackbar:MatSnackBar, private userservice:UserService,private activate:ActivatedRoute,private route:Router){}
   form:FormGroup|any
   submitForm(){
     console.log(this.form.value)
@@ -23,6 +24,8 @@ export class RestaurantEditComponent {
       city:this.form.value.city
     }
     this.userservice.updateRestaurantByVendor(restaurant).subscribe(res=>{console.log("formUpdated");
+  this._snackbar.open("your Restaurant is updated", "Ok",{duration:2000});
+
     this.route.navigateByUrl("/vendorRestaurantDashboard")
     })
   }
@@ -55,9 +58,12 @@ export class RestaurantEditComponent {
   }
   updateImage(event:any){
     this.resService.updateImage( this.restaurant.image,event.target.files[0]).subscribe(res=>{console.log("succesImage");
+
     let img:any = document.getElementById("profile-img")
     img.src = window.URL.createObjectURL(event.target.files[0])
     console.log(img.src)
+  this._snackbar.open("your Image is updated", "Ok",{duration:2000});
+
     })
   }
 }

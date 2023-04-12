@@ -50,6 +50,7 @@ import { FavouriteDashboardComponent } from './favourite-dashboard/favourite-das
 import { FavouriteCardComponent } from './favourite-card/favourite-card.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PaymentComponent } from './payment/payment.component';
 
 
 
@@ -83,7 +84,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     VendorCusisineCardComponent,
     VendorCusisineDashboardComponent,
     FavouriteDashboardComponent,
-    FavouriteCardComponent
+    FavouriteCardComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

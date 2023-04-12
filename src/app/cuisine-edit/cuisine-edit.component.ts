@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from './../services/restaurant.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cuisine-edit',
@@ -19,7 +20,7 @@ export class CuisineEditComponent {
     price: 0,
     quantity: 0
   }
-  constructor(private fb:FormBuilder,private restaurantService:RestaurantService,private activate:ActivatedRoute,private router:Router){}
+  constructor(private fb:FormBuilder,private restaurantService:RestaurantService,private activate:ActivatedRoute,private router:Router,private _snackbar:MatSnackBar){}
 
   id:any
 
@@ -43,7 +44,7 @@ export class CuisineEditComponent {
               this.cuisineForm = this.fb.group({
                 name: [res.name, Validators.required],
                 description: [res.description, Validators.required],
-                price: [res.price, Validators.required],
+                price: [res.price, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/) , Validators.min(1)]],
                 type: ['', Validators.required],
                 // tags: ['',[]],
                 // image: [""]
@@ -53,6 +54,7 @@ export class CuisineEditComponent {
         })
 
   }
+ 
   onSubmit(){
     // this.activate.paramMap.subscribe(
     //   data => {
@@ -77,6 +79,7 @@ export class CuisineEditComponent {
 
     this.restaurantService.updateCuisineByVendor(this.id,cuisine).subscribe(res=>{console.log("updateSuccess");
     this.router.navigateByUrl("vendorcuisineDashboard/"+this.id)
+    this._snackbar.open("your Cuisine is updated", "Ok",{duration:2000});
         },err=>{console.log("notUpdated")})
 
   }

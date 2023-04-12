@@ -17,7 +17,7 @@
 
 <div *ngIf="restaurants.length > 0">
   <div *ngFor="let restaurant of restaurants" >
-    <app-vendor-restaurant-card [restaurantId] = "restaurant"></app-vendor-restaurant-card>
+    <app-vendor-restaurant-card (deleted) = "deleted()" [restaurantId] = "restaurant"></app-vendor-restaurant-card>
   </div>
 </div>
 

@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { LoginService } from './login.service';
 import { Order } from '../models/order';
 import { Cuisine } from '../models/cuisine';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,7 @@ export class UserService {
     );
   }
 
-  constructor(private http: HttpClient,private login:LoginService,private router:Router) { }
+  constructor(private http: HttpClient,private login:LoginService,private router:Router,private _snackbar:MatSnackBar) { }
   register(user:FormData){
     console.log(user)
 
@@ -32,24 +33,17 @@ export class UserService {
       next:(data:any)=>{
         if(data!="")
         {
+  this._snackbar.open("Successfully registered", "Ok",{duration:2000});
+
           this.router.navigateByUrl("/login")
           console.log(data)
         }
       }
   })
   }
-  vendor(user:User){
+  vendor(user:User):Observable<any>{
     console.log("is working")
-    this.http.post("http://localhost:9000/api/v1/user/vendor",user,{headers:this.header}).subscribe({
-      next:(data:any)=>{
-        if(data!="")
-        {
-          localStorage.setItem("vendor","true")
-          this.router.navigateByUrl("/vendorRestaurantDashboard")
-          console.log(data)
-        }
-      }
-  })
+   return this.http.post("http://localhost:9000/api/v1/user/vendor",user,{headers:this.header})
   }
   addRestaurant(restaurant:FormData){
     // const headers = new HttpHeaders (
@@ -71,7 +65,8 @@ export class UserService {
   addCuisine(cuisine:FormData,restaurantId:any){
     cuisine.forEach(data=>{console.log(data)})
     this.http.post("http://localhost:9000/restaurant/cuisine/"+localStorage.getItem('email')+"/"+restaurantId,cuisine).subscribe(
-      res=>{console.log(res+"cuisine method")}
+      res=>{console.log(res+"cuisine method")
+      this.router.navigateByUrl("/vendorcuisineDashboard/"+restaurantId)}
     )
   }
 // ---------------
@@ -97,7 +92,8 @@ export class UserService {
    return this.http.delete("http://localhost:9000/api/v1/user/removeFavorite/"+localStorage.getItem('email')+"/"+restaurantId ,{headers:this.header})
   }
   addFav(restaurantId:any):Observable<any>{
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                     .set("authorization" , "Bearer " +String(localStorage.getItem("token")))
    return this.http.post("http://localhost:9000/api/v1/user/favorite/"+localStorage.getItem('email'),JSON.stringify(restaurantId),{ headers: headers })
   //  +this.login.user.email,restaurantId)
   }
@@ -170,4 +166,8 @@ export class UserService {
   getCartTotal():Observable<any>{
     return this.http.get("http://localhost:9000/api/v1/user/get/cartTotal/"+localStorage.getItem("email") ,{headers:this.header})
   }
+  getAddressById(addressId:any):Observable<any>{
+    return this.http.get("http://localhost:9000/api/v1/user/get/address/"+localStorage.getItem("email")+"/"+addressId ,{headers:this.header})
+  }
 }
+

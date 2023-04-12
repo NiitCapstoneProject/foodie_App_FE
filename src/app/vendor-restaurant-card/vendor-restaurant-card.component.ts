@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { UserService } from './../services/user.service';
 import { Restaurant } from './../models/restaurant';
 import { RestaurantService } from './../services/restaurant.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-vendor-restaurant-card',
@@ -20,8 +20,10 @@ export class VendorRestaurantCardComponent implements OnInit {
       }
     )
   }
-  delRestaurant(Id:any){this.userService.deleteRestaurantByVendor(Id).subscribe(res=>{console.log("deleted");
-
+  @Output() deleted:EventEmitter<any> = new  EventEmitter<any>()
+  delRestaurant(Id:any){
+    this.userService.deleteRestaurantByVendor(Id).subscribe(res=>{console.log("deleted");
+    this.deleted.emit("true")
   },err=>{console.log("notDeleted");
   })}
   editRestaurant(){

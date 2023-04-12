@@ -5,7 +5,7 @@
         <div class="card mb-4 cuisine-card">
           <div class="row g-0">
             <div class="col-12 col-md-3">
-              <img src="http://localhost:9000/image/getimage/{{cuisine.image}}" class="img-fluid rounded-3" alt="Cuisine Image">
+              <img src="http://localhost:9000/image/getimage/{{cuisine.image}}" class="img-fluid rounded-3" alt="Cuisine Image" style="max-height: 200px;">
             </div>
             <div class="col-12 col-md-6">
               <div class="card-body">
@@ -25,7 +25,7 @@
               <div class="card-body d-flex flex-column justify-content-center align-items-center">
                 <h5 class="card-title price">₹{{cuisine.price}}</h5>
                 <button class="btn btn-primary mt-3" (click)="addCart()" *ngIf="!addedToCart">Add to Cart</button>
-                <button class="btn btn-primary mt-3" style="background-color: gray;"  *ngIf="addedToCart">Added To Cart</button>
+                <button class="btn btn-primary mt-3" (click)="delete(cuisine)" style="background-color: gray;"  *ngIf="addedToCart">Added To Cart</button>
               </div>
             </div>
           </div>

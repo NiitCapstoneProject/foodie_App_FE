@@ -22,4 +22,9 @@ export class VendorRestaurantDashboardComponent {
   add(){
     this.router.navigateByUrl("/addRestaurant")
   }
+
+
+  deleted(){
+    this.ngOnInit()
+  }
 }
